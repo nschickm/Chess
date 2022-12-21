@@ -1,15 +1,58 @@
 package com.example.chess.model;
 
-public class Bishop extends Piece{
+import java.util.Objects;
+
+public class Bishop extends Piece {
     public Bishop(int x, int y, String color) {
         super(x, y, color);
         name = "bishop";
     }
 
     @Override
-    public boolean checkMove(Piece[][] board, int targetX, int targetY) {
-        boolean r = false;
+    public Boolean[][] getPossibleMoves(Piece[][] board) {
+        Boolean[][] possibleMoves = new Boolean[MAX_X][MAX_Y];
+        for (int i = 0; i < MAX_X; i++) {
+            for (int j = 0; j < MAX_Y; j++) {
+                possibleMoves[i][j] = false;
+            }
+        }
 
-        return r;
+        for (int i = 0; i < MAX_Y; i++) {
+            if (board[x + i][y + i] == null) {
+                possibleMoves[x + i][y + i] = true;
+            } else if (!Objects.equals(board[x + i][y + i].color, color)) {
+                possibleMoves[x + i][y + i] = true;
+                i = MAX_Y;
+            }
+        }
+
+        for (int i = 0; i < MAX_Y; i++) {
+            if (board[x - i][y + i] == null) {
+                possibleMoves[x - i][y + i] = true;
+            } else if (!Objects.equals(board[x - i][y + i].color, color)) {
+                possibleMoves[x - i][y + i] = true;
+                i = MAX_Y;
+            }
+        }
+
+        for (int i = 0; i < MAX_X; i++) {
+            if (board[x + i][y - i] == null) {
+                possibleMoves[x + i][y - i] = true;
+            } else if (!Objects.equals(board[x + i][y - i].color, color)) {
+                possibleMoves[x + i][y - i] = true;
+                i = MAX_X;
+            }
+        }
+
+        for (int i = 0; i < MAX_X; i++) {
+            if (board[x - i][y - i] == null) {
+                possibleMoves[x - i][y - i] = true;
+            } else if (!Objects.equals(board[x - i][y - i].color, color)) {
+                possibleMoves[x - i][y - i] = true;
+                i = MAX_X;
+            }
+        }
+
+        return possibleMoves;
     }
 }

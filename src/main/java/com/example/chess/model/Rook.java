@@ -7,9 +7,38 @@ public class Rook extends Piece {
     }
 
     @Override
-    public boolean checkMove(Piece[][] board, int targetX, int targetY) {
-        boolean r = false;
+    public Boolean[][] getPossibleMoves(Piece[][] board) {
+        Boolean[][] possibleMoves = new Boolean[MAX_X][MAX_Y];
+        for (int i = 0; i < MAX_X; i++) {
+            for (int j = 0; j < MAX_Y; j++) {
+                possibleMoves[i][j] = false;
+            }
+        }
 
-        return r;
+        for (int i = 0; i < MAX_X; i++) {
+            if (board[x + i][y] == null){
+                possibleMoves[x+i][y] = true;
+            }
+        }
+
+        for (int i = 0; i < MAX_X; i++) {
+            if (board[x - i][y] == null){
+                possibleMoves[x-i][y] = true;
+            }
+        }
+
+        for (int i = 0; i < MAX_Y; i++) {
+            if (board[x][y + i] == null){
+                possibleMoves[x][y + i] = true;
+            }
+        }
+
+        for (int i = 0; i < MAX_X; i++) {
+            if (board[x][y - i] == null){
+                possibleMoves[x][y - i] = true;
+            }
+        }
+
+        return possibleMoves;
     }
 }
