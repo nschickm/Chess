@@ -14,7 +14,7 @@ public class Pawn extends Piece {
         List<String> moves = new ArrayList<String>();
 
         boolean r = false;
-
+/*
         // Check one step forward
         if (row > 0) {
             moves.add(row - 1 + " " + col);
@@ -34,7 +34,7 @@ public class Pawn extends Piece {
         if (row > 0 && col < 7) {
             moves.add(row - 1 + " " + col + 1);
         }
-
+*/
         return r;
     }
 }
