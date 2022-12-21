@@ -1,7 +1,6 @@
 package com.example.chess.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class Pawn extends Piece {
     public Pawn(int x, int y, String color) {
@@ -10,31 +9,58 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public boolean checkMove(Piece[][] board, int targetX, int targetY) {
-        List<String> moves = new ArrayList<String>();
-
-        boolean r = false;
-/*
-        // Check one step forward
-        if (row > 0) {
-            moves.add(row - 1 + " " + col);
+    public Boolean[][] getPossibleMoves(Piece[][] board) {
+        Boolean[][] possibleMoves = new Boolean[MAX_X][MAX_Y];
+        for (int i = 0; i < MAX_X; i++) {
+            for (int j = 0; j < MAX_Y; j++) {
+                possibleMoves[i][j] = false;
+            }
         }
 
-        // Check two steps forward (only possible on the pawn's first move)
-        if (row == 6) {
-            moves.add(row - 2 + " " + col);
+        if (Objects.equals(color, WHITE)) {
+            if (board[x][y++] == null) {
+                possibleMoves[x][y++] = true;
+            }
+
+            if (board[x][y++] == null && board[x][y + 2] == null) {
+                possibleMoves[x][y + 2] = true;
+            }
+
+            if (board[x++][y++] != null) {
+                if (Objects.equals(board[x++][y++].color, BLACK)) {
+                    possibleMoves[x++][y++] = true;
+                }
+            }
+
+            if (board[x--][y++] != null) {
+                if (Objects.equals(board[x--][y++].color, BLACK)) {
+                    possibleMoves[x++][y++] = true;
+                }
+            }
         }
 
-        // Check capture on the left
-        if (row > 0 && col > 0) {
-            moves.add(row - 1 + " " + col - 1);
+        if (Objects.equals(color, BLACK)) {
+            if (board[x][y--] == null) {
+                possibleMoves[x][y--] = true;
+            }
+
+            if (board[x][y--] == null && board[x][y - 2] == null) {
+                possibleMoves[x][y - 2] = true;
+            }
+
+            if (board[x++][y--] != null) {
+                if (Objects.equals(board[x++][y--].color, WHITE)) {
+                    possibleMoves[x++][y--] = true;
+                }
+            }
+
+            if (board[x--][y--] != null) {
+                if (Objects.equals(board[x--][y--].color, WHITE)) {
+                    possibleMoves[x++][y++] = true;
+                }
+            }
         }
 
-        // Check capture on the right
-        if (row > 0 && col < 7) {
-            moves.add(row - 1 + " " + col + 1);
-        }
-*/
-        return r;
+        return possibleMoves;
     }
 }
