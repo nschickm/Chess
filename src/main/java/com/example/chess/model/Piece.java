@@ -17,8 +17,8 @@ public abstract class Piece {
         this.color = color;
     }
 
-    public boolean checkMove(Piece[][] board, int targetX, int targetY) {
-        return false;
+    public Boolean[][] getPossibleMoves(Piece[][] board) {
+        return null;
     }
 
     public void move(int x, int y) {
