@@ -5,8 +5,6 @@ import com.example.chess.model.*;
 public class HelloController {
     private Piece[][] board;
 
-
-
     public void initialize() {
         board[0][0] = new Rook(0, 0, Piece.BLACK);
         board[1][0] = new Knight(1, 0, Piece.BLACK);
