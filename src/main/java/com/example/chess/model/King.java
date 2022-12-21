@@ -2,12 +2,20 @@ package com.example.chess.model;
 
 import java.util.Objects;
 
+/**
+ *
+ */
 public class King extends Piece {
     public King(int x, int y, String color) {
         super(x, y, color);
         name = "king";
     }
 
+    /**
+     *  Checks all the possible moves for King piece
+     * @param board
+     * @return
+     */
     @Override
     public Boolean[][] getPossibleMoves(Piece[][] board) {
         Boolean[][] possibleMoves = new Boolean[MAX_X][MAX_Y];
