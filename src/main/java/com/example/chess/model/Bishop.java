@@ -17,7 +17,7 @@ public class Bishop extends Piece {
             }
         }
 
-        for (int i = 0; i < MAX_Y; i++) {
+        for (int i = 0; i < MAX_Y - y && i < MAX_X - x; i++) {
             if (board[x + i][y + i] == null) {
                 possibleMoves[x + i][y + i] = true;
             } else if (!Objects.equals(board[x + i][y + i].color, color)) {
@@ -26,7 +26,7 @@ public class Bishop extends Piece {
             }
         }
 
-        for (int i = 0; i < MAX_Y; i++) {
+        for (int i = 0; i < MAX_Y - y && i < x; i++) {
             if (board[x - i][y + i] == null) {
                 possibleMoves[x - i][y + i] = true;
             } else if (!Objects.equals(board[x - i][y + i].color, color)) {
@@ -35,7 +35,7 @@ public class Bishop extends Piece {
             }
         }
 
-        for (int i = 0; i < MAX_X; i++) {
+        for (int i = 0; i < MAX_X - x && i < y; i++) {
             if (board[x + i][y - i] == null) {
                 possibleMoves[x + i][y - i] = true;
             } else if (!Objects.equals(board[x + i][y - i].color, color)) {
@@ -44,7 +44,7 @@ public class Bishop extends Piece {
             }
         }
 
-        for (int i = 0; i < MAX_X; i++) {
+        for (int i = 0; i < x && i < y; i++) {
             if (board[x - i][y - i] == null) {
                 possibleMoves[x - i][y - i] = true;
             } else if (!Objects.equals(board[x - i][y - i].color, color)) {

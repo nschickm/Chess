@@ -1,5 +1,7 @@
 package com.example.chess.model;
 
+import java.util.Objects;
+
 public class Rook extends Piece {
     public Rook(int x, int y, String color) {
         super(x, y, color);
@@ -15,27 +17,39 @@ public class Rook extends Piece {
             }
         }
 
-        for (int i = 0; i < MAX_X; i++) {
-            if (board[x + i][y] == null){
-                possibleMoves[x+i][y] = true;
+        for (int i = 0; i < MAX_X - x; i++) {
+            if (board[x + i][y] == null) {
+                possibleMoves[x + i][y] = true;
+            } else if (!Objects.equals(board[x + i][y].color, color)) {
+                possibleMoves[x + i][y] = true;
+                i = MAX_X - x;
             }
         }
 
-        for (int i = 0; i < MAX_X; i++) {
-            if (board[x - i][y] == null){
-                possibleMoves[x-i][y] = true;
+        for (int i = 0; i < x; i++) {
+            if (board[x - i][y] == null) {
+                possibleMoves[x - i][y] = true;
+            } else if (!Objects.equals(board[x - i][y].color, color)) {
+                possibleMoves[x - i][y] = true;
+                i = x;
             }
         }
 
-        for (int i = 0; i < MAX_Y; i++) {
-            if (board[x][y + i] == null){
+        for (int i = 0; i < MAX_Y - y; i++) {
+            if (board[x][y + i] == null) {
                 possibleMoves[x][y + i] = true;
+            } else if (!Objects.equals(board[x][y + i].color, color)) {
+                possibleMoves[x][y + i] = true;
+                i = MAX_Y - y;
             }
         }
 
-        for (int i = 0; i < MAX_X; i++) {
-            if (board[x][y - i] == null){
+        for (int i = 0; i < y; i++) {
+            if (board[x][y - i] == null) {
                 possibleMoves[x][y - i] = true;
+            } else if (!Objects.equals(board[x][y - i].color, color)) {
+                possibleMoves[x][y - i] = true;
+                i = y;
             }
         }
 

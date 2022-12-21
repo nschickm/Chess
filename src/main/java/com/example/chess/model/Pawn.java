@@ -22,7 +22,7 @@ public class Pawn extends Piece {
                 possibleMoves[x][y++] = true;
             }
 
-            if (board[x][y++] == null && board[x][y + 2] == null) {
+            if (y == 2 && board[x][y++] == null && board[x][y + 2] == null) {
                 possibleMoves[x][y + 2] = true;
             }
 
@@ -44,7 +44,7 @@ public class Pawn extends Piece {
                 possibleMoves[x][y--] = true;
             }
 
-            if (board[x][y--] == null && board[x][y - 2] == null) {
+            if (y == 6 && board[x][y--] == null && board[x][y - 2] == null) {
                 possibleMoves[x][y - 2] = true;
             }
 
