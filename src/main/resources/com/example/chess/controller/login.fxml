@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.chess.controller.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane fx:id="anchorPaneTop" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.controller.LoginController">
+    <children>
+        <Label fx:id="nameLabel" layoutX="123.0" layoutY="111.0" text="Name:" />
+        <Label fx:id="passwordLabel" layoutX="115.0" layoutY="148.0" text="Passwort:" />
+        <Label layoutX="286.0" layoutY="46.0" text="Chess" />
+        <TextField fx:id="username" layoutX="181.0" layoutY="107.0" />
+        <Label fx:id="welcometext" layoutX="182.0" layoutY="79.0" text="Login or Sign up!" />
+        <Button fx:id="loginbttn" layoutX="197.0" layoutY="212.0" mnemonicParsing="false" onAction="#loginbttnclicked" text="Login" />
+        <Button fx:id="signUpSelect" layoutX="275.0" layoutY="212.0" mnemonicParsing="false" onAction="#singUpbttnclicked" text="Sign up" />
+      <TextField fx:id="password" layoutX="181.0" layoutY="144.0" />
+      <Label layoutX="170.0" layoutY="182.0" text="Show password characteres" />
+      <CheckBox fx:id="checkBoxPassword" layoutX="328.0" layoutY="182.0" mnemonicParsing="false" />
+      <PasswordField fx:id="passwordEncrypted" layoutX="181.0" layoutY="144.0" />
+      <Label fx:id="sameNameErrorMsg" layoutX="156.0" layoutY="280.0" text="Same name as player 1, please choose a different one!" />
+    </children>
+</AnchorPane>
