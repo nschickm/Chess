@@ -25,4 +25,12 @@ public abstract class Piece {
         this.x = x;
         this.y = y;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getColor() {
+        return color;
+    }
 }
