@@ -111,12 +111,11 @@ public class LoginController extends AbstractController{
                 LoginController c = this.loadFxmlFile(
                         "login.fxml",
                         "Player 2 login",
-                        ((JFXButton) actionEvent.getSource()).getScene().getWindow(),
+                        null,
                         LoginController.class
                 );
 
 
-                c.closeWindow();
             }
         } else {
             // kein Account
