@@ -3,8 +3,10 @@ package com.example.chess.controller;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 import java.io.IOException;
@@ -22,8 +24,11 @@ public abstract class AbstractController implements PublisherInterface<Boolean> 
 
         T controller = fxmlLoader.getController();
         Stage stage = new Stage();
+        stage.initStyle(StageStyle.TRANSPARENT);
+
         stage.setScene(new Scene(scene));
         stage.setTitle(title);
+        scene.getScene().setFill(Color.TRANSPARENT);
 
         controller.setStage(stage);
 
@@ -31,6 +36,7 @@ public abstract class AbstractController implements PublisherInterface<Boolean> 
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(owner);
         }
+
 
         stage.show();
 

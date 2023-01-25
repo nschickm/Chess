@@ -79,6 +79,8 @@ public class LoginController extends AbstractController{
      * @throws IOException
      */
     public void loginbttnclicked(ActionEvent actionEvent) throws SQLException, IOException {
+        Stage stage = (Stage) username.getScene().getWindow();
+        stage.close();
 
         Connection connection = Database.getConnection();
 
@@ -96,6 +98,7 @@ public class LoginController extends AbstractController{
             }
 
             if(countplayers == 1){
+
                 SettingsController c = this.loadFxmlFile(
                         "settings.fxml",
                         "Settings",
@@ -105,15 +108,19 @@ public class LoginController extends AbstractController{
 
 
 
+
             }else {
                 countplayers++;
                 checkname = this.username.getText();
+
                 LoginController c = this.loadFxmlFile(
-                        "login.fxml",
+                        "testlogindesign.fxml",
                         "Player 2 login",
                         null,
                         LoginController.class
                 );
+
+
 
 
             }
