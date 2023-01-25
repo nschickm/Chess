@@ -12,7 +12,7 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.Arrays;
 
-public class BoardController {
+public class BoardController extends AbstractController{
     @FXML
     private GridPane gridPane = new GridPane();
 

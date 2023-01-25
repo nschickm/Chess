@@ -4,6 +4,7 @@ import com.example.chess.model.Database;
 import com.example.chess.model.PasswordHasher;
 import com.example.chess.model.Piece;
 import com.example.chess.model.Player;
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +25,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class LoginController {
+public class LoginController extends AbstractController{
     public TextField username;
     public TextField password;
     public Label nameLabel;
@@ -95,12 +96,27 @@ public class LoginController {
             }
 
             if(countplayers == 1){
-                changeSceneSetting();
+                SettingsController c = this.loadFxmlFile(
+                        "settings.fxml",
+                        "Settings",
+                        ((Button) actionEvent.getSource()).getScene().getWindow(),
+                        SettingsController.class
+                );
+
+
 
             }else {
                 countplayers++;
                 checkname = this.username.getText();
-                changeSceneLogin();
+                LoginController c = this.loadFxmlFile(
+                        "login.fxml",
+                        "Player 2 login",
+                        ((JFXButton) actionEvent.getSource()).getScene().getWindow(),
+                        LoginController.class
+                );
+
+
+                c.closeWindow();
             }
         } else {
             // kein Account
@@ -132,61 +148,7 @@ public class LoginController {
     }
 
 
-    /**
-     * Closes the current FXML file and forwards to the Settings Page
-     * @throws IOException
-     */
-    public void changeSceneSetting() throws IOException {
-        Stage stage = new Stage();
 
-        Stage stageclose = (Stage) loginbttn.getScene().getWindow();
-        stageclose.close();
-
-        final FXMLLoader fxmlLoader = new FXMLLoader();
-        URL u = HelloApplication.class.getResource("settings.fxml");
-
-        assert u != null;
-        Scene scene = new Scene(fxmlLoader.load(u.openStream()));
-        //PlayfieldController pc = fxmlLoader.getController();
-        SettingsController settingsController = fxmlLoader.getController();
-        //pc.afterSwitch(scene, "normal","0", nameTextField.getText());
-
-        stage.setTitle("Chess");
-        scene.setFill(Color.TRANSPARENT);
-        scene.getStylesheets().add(LoginController.class.getResource("color.css").toExternalForm());
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-    }
-
-    /**
-     * Closes the current FXML file and forwards to the Login Page
-     * @throws IOException
-     */
-    public void changeSceneLogin() throws IOException {
-        Stage stage = new Stage();
-
-        Stage stageclose = (Stage) loginbttn.getScene().getWindow();
-        stageclose.close();
-
-        final FXMLLoader fxmlLoader = new FXMLLoader();
-        URL u = HelloApplication.class.getResource("testlogindesign.fxml");
-
-        assert u != null;
-        Scene scene = new Scene(fxmlLoader.load(u.openStream()));
-        //PlayfieldController pc = fxmlLoader.getController();
-        LoginController loginController = fxmlLoader.getController();
-        //pc.afterSwitch(scene, "normal","0", nameTextField.getText());
-
-        stage.setTitle("Chess");
-        scene.setFill(Color.TRANSPARENT);
-        scene.getStylesheets().add(LoginController.class.getResource("color.css").toExternalForm());
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-    }
 
 
     public TextField getUsername() {

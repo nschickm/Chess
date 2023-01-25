@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -13,7 +14,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 
-public class SettingsController {
+public class SettingsController extends AbstractController {
     public JFXComboBox comboBox;
     public JFXButton startBttn;
     public JFXComboBox comboBoxTheme;
@@ -22,7 +23,7 @@ public class SettingsController {
     public static Color color2;
     public static double time;
 
-    public void initialize(){
+    public void initialize() {
         comboBox.getItems().addAll(
                 "5 minutes",
                 "10 minutes",
@@ -68,34 +69,17 @@ public class SettingsController {
             }
         }
 
+
         try {
-            changeSceneBoard();
+            BoardController c = this.loadFxmlFile(
+                    "board.fxml",
+                    "Chess",
+                    ((Button) actionEvent.getSource()).getScene().getWindow(),
+                    BoardController.class
+            );
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
 
-    public void changeSceneBoard() throws IOException {
-        Stage stage = new Stage();
-
-        Stage stageclose = (Stage) startBttn.getScene().getWindow();
-        stageclose.close();
-
-        final FXMLLoader fxmlLoader = new FXMLLoader();
-        URL u = HelloApplication.class.getResource("board.fxml");
-
-        assert u != null;
-        Scene scene = new Scene(fxmlLoader.load(u.openStream()));
-        //PlayfieldController pc = fxmlLoader.getController();
-        BoardController settingsController = fxmlLoader.getController();
-        //pc.afterSwitch(scene, "normal","0", nameTextField.getText());
-
-        stage.setTitle("Chess");
-        scene.setFill(Color.TRANSPARENT);
-        scene.getStylesheets().add(BoardController.class.getResource("board.css").toExternalForm());
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
     }
 }
