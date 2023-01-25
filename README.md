@@ -19,7 +19,7 @@
 
 ![image](https://user-images.githubusercontent.com/83589343/208866833-1c3acb60-68cc-4b20-8872-8015040bec51.png)
 
-5. The database is added
+5. Even if you get an error, the table should be added to the database
 
 ![image](https://user-images.githubusercontent.com/83589343/214510529-daf33236-0d10-442a-9ea2-442eee16d23c.png)
 
