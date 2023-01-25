@@ -41,6 +41,8 @@ public class LoginController extends AbstractController{
     public Label sameNameErrorMsg;
     public ImageView imgViewBoard;
 
+
+
     public void initialize() {
         Image image = new Image("chessboardPNG.png");
         imgViewBoard.setImage(image);

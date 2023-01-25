@@ -7,11 +7,13 @@ import java.sql.ResultSet;
 public class Player {
     private String name;
     private String color;
+    private double timeInMillis;
 
 
-    public Player(String name, String color) {
+    public Player(String name, String color, double timeInMillis) {
         this.name = name;
         this.color = color;
+        this.timeInMillis = timeInMillis;
     }
 
     public Player(ResultSet results) {
@@ -31,5 +33,13 @@ public class Player {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public double getTimeInMillis() {
+        return timeInMillis;
+    }
+
+    public void setTimeInMillis(double timeInMillis) {
+        this.timeInMillis = timeInMillis;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.chess.controller;
 
+import com.example.chess.model.Player;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,6 +16,9 @@ import java.util.ArrayList;
 public abstract class AbstractController implements PublisherInterface<Boolean> {
 
     private Stage stage = null;
+
+    protected Player p1;
+    protected Player p2;
 
     private ArrayList<SubscriberInterface<Boolean>> list = new ArrayList<>();
 

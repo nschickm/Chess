@@ -1,5 +1,6 @@
 package com.example.chess.controller;
 
+import com.example.chess.model.Player;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
@@ -22,6 +23,8 @@ public class SettingsController extends AbstractController {
     public static Color color1;
     public static Color color2;
     public static double time;
+
+
 
     public void initialize() {
         comboBox.getItems().addAll(
@@ -68,6 +71,7 @@ public class SettingsController extends AbstractController {
 
             }
         }
+
 
 
         try {
