@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.controller.SettingsController">
+<AnchorPane prefHeight="249.0" prefWidth="441.0" style="-fx-background-radius: 25;" styleClass="colorBackground" stylesheets="@color.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.controller.SettingsController">
    <children>
-      <Label layoutX="241.0" layoutY="37.0" text="Player 1 please select" />
-      <ChoiceBox fx:id="choiceBoxTime" layoutX="225.0" layoutY="187.0" prefWidth="150.0" value="10 minutes">
-         <items>
-            <FXCollections fx:factory="observableArrayList">
-               <String fx:value="5 minutes" />
-               <String fx:value="10 minutes" />
-               <String fx:value="15 minutes" />
-               <String fx:value="20 minutes" />
-            </FXCollections>
-         </items>
-      </ChoiceBox>
-      <Label layoutX="272.0" layoutY="145.0" text="Select time:" />
+      <Label layoutX="91.0" layoutY="40.0" styleClass="fontsForText" stylesheets="@color.css" text="Please select the time" />
+      <JFXComboBox fx:id="comboBox" layoutX="146.0" layoutY="76.0" prefWidth="150.0" />
+      <JFXButton fx:id="startBttn" buttonType="RAISED" layoutX="180.0" layoutY="176.0" onAction="#startBttnClicked" prefHeight="41.0" prefWidth="87.0" styleClass="colorButtonContrast" stylesheets="@color.css" text="Login" />
+      <JFXComboBox fx:id="comboBoxTheme" layoutX="146.0" layoutY="125.0" prefWidth="150.0" value="No Theme" />
    </children>
 </AnchorPane>

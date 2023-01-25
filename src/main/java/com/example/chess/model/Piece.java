@@ -1,6 +1,8 @@
 package com.example.chess.model;
 
-public abstract class Piece {
+import javafx.scene.layout.StackPane;
+
+public abstract class Piece extends StackPane {
     public static String WHITE = "white";
     public static String BLACK = "black";
     public static int MAX_X = 8;
@@ -32,5 +34,13 @@ public abstract class Piece {
 
     public String getColor() {
         return color;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }

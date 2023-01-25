@@ -2,8 +2,15 @@ package com.example.chess.controller;
 
 import com.example.chess.model.*;
 import com.example.chess.view.BoardView;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.layout.GridPane;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
+import java.util.Arrays;
 
 public class BoardController {
     @FXML
@@ -11,6 +18,8 @@ public class BoardController {
 
     private Piece[][] board = new Piece[Piece.MAX_X][Piece.MAX_Y];
     private BoardView boardView;
+
+
 
     public void gameStart() {
         boardView.drawBoard();
@@ -43,9 +52,13 @@ public class BoardController {
         }
 
         boardView = new BoardView(gridPane, board);
-        System.out.println(board[0][0].getName());
+        System.out.println(Arrays.deepToString(board).replace("], ", "]\n"));
+
 
         gameStart();
     }
+
+
+
 
 }

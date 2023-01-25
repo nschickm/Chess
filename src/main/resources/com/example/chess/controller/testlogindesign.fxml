@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.controller.LoginController">
+    <children>
+        <AnchorPane fx:id="anchorPaneTop" layoutX="224.0" layoutY="76.0" prefHeight="249.0" prefWidth="310.0" style="-fx-background-radius: 25; -fx-background-color: white;">
+            <children>
+                <JFXTextField fx:id="username" layoutX="72.0" layoutY="53.0" prefHeight="25.0" prefWidth="174.0" promptText="Enter Login">
+                    <focusColor>
+                        <LinearGradient endX="1.0" endY="1.0">
+                            <stops>
+                                <Stop>
+                                    <color>
+                                        <Color red="0.9803921580314636" green="0.8039215803146362" blue="0.40784314274787903" />
+                                    </color>
+                                </Stop>
+                                <Stop offset="1.0">
+                                    <color>
+                                        <Color red="0.9882352948188782" green="0.4627451002597809" blue="0.7019608020782471" />
+                                    </color>
+                                </Stop>
+                            </stops>
+                        </LinearGradient>
+                    </focusColor>
+                </JFXTextField>
+                <JFXTextField fx:id="password" layoutX="72.0" layoutY="109.0" prefHeight="25.0" prefWidth="174.0" promptText="Enter Password">
+                    <focusColor>
+                        <LinearGradient endX="1.0" endY="1.0">
+                            <stops>
+                                <Stop>
+                                    <color>
+                                        <Color red="0.9803921580314636" green="0.8039215803146362" blue="0.40784314274787903" />
+                                    </color>
+                                </Stop>
+                                <Stop offset="1.0">
+                                    <color>
+                                        <Color red="0.9882352948188782" green="0.4627451002597809" blue="0.7019608020782471" />
+                                    </color>
+                                </Stop>
+                            </stops>
+                        </LinearGradient>
+                    </focusColor>
+                </JFXTextField>
+                <JFXButton buttonType="RAISED" layoutX="68.0" layoutY="176.0" onAction="#loginbttnclicked" prefHeight="41.0" prefWidth="87.0" styleClass="colorBackground" stylesheets="@color.css" text="Login" fx:id="loginbttn"/>
+                <JFXButton buttonType="RAISED" layoutX="163.0" layoutY="176.0" onAction="#singUpbttnclicked" prefHeight="41.0" prefWidth="87.0" styleClass="colorBackground" stylesheets="@color.css" text="Sign Up" fx:id="signUpSelect"/>
+            <JFXCheckBox fx:id="checkBoxPassword" layoutX="79.0" layoutY="146.0" mnemonicParsing="false" text="Show Password Characters" />
+            <JFXPasswordField fx:id="passwordEncrypted" layoutX="72.0" layoutY="109.0" prefHeight="25.0" prefWidth="174.0" text="Enter Password" />
+            <Label fx:id="sameNameErrorMsg" layoutX="145.0" layoutY="217.0" />
+
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="sideBar" layoutX="31.0" layoutY="53.0" prefHeight="295.0" prefWidth="220.0" style="-fx-background-radius: 25;" styleClass="colorBackground" stylesheets="@color.css">
+            <children>
+                <JFXButton layoutX="182.0" layoutY="14.0" text="X" />
+            <ImageView fx:id="imgViewBoard" fitHeight="195.0" fitWidth="200.0" layoutX="10.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" />
+
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

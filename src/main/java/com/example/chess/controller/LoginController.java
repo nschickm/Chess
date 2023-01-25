@@ -1,11 +1,16 @@
 package com.example.chess.controller;
 
 import com.example.chess.model.Database;
+import com.example.chess.model.PasswordHasher;
+import com.example.chess.model.Piece;
+import com.example.chess.model.Player;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -33,32 +38,51 @@ public class LoginController {
     private static int countplayers = 0;
     private static String checkname = "";
     public Label sameNameErrorMsg;
+    public ImageView imgViewBoard;
 
     public void initialize() {
+        Image image = new Image("chessboardPNG.png");
+        imgViewBoard.setImage(image);
+
+
+
         sameNameErrorMsg.setVisible(false);
+        passwordEncrypted.setPromptText("Enter Password");
 
         passwordEncrypted.textProperty().bindBidirectional(password.textProperty());
         StackPane sp = new StackPane(passwordEncrypted, password);
         passwordEncrypted.toFront();
+        password.setVisible(false);
         checkBoxPassword.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue){
                 password.toFront();
+                password.setVisible(true);
+                passwordEncrypted.setVisible(false);
             }else {
                 passwordEncrypted.toFront();
+                password.setVisible(false);
+                passwordEncrypted.setVisible(true);
             }
         });
-        sp.setLayoutX(181.0);
-        sp.setLayoutY(144.0);
+
+        sp.setLayoutX(72.0);
+        sp.setLayoutY(109.0);
         anchorPaneTop.getChildren().add(sp);
 
     }
 
+    /**
+     * Überp
+     * @param actionEvent
+     * @throws SQLException
+     * @throws IOException
+     */
     public void loginbttnclicked(ActionEvent actionEvent) throws SQLException, IOException {
 
         Connection connection = Database.getConnection();
 
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM t_user WHERE username = '" + this.username.getText() + "' AND password = '" + this.password.getText() + "';");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM t_user WHERE username = '" + this.username.getText() + "' AND password = '" + PasswordHasher.hashPassword(this.password.getText()) + "';");
 
         if (resultSet.next()) {
             // login -> weiterleiten
@@ -84,12 +108,17 @@ public class LoginController {
         }
     }
 
+    /**
+     * The values entered will be added to
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void singUpbttnclicked(ActionEvent actionEvent) throws SQLException {
         Connection connection = Database.getConnection();
 
         try {
             Statement statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO t_user (username, password) VALUES ('" + this.username.getText() + "','" + this.password.getText() + "');");
+            statement.executeUpdate("INSERT INTO t_user (username, password) VALUES ('" + this.username.getText() + "','" + PasswordHasher.hashPassword(this.password.getText()) + "');");
 
 
             username.clear();
@@ -104,7 +133,7 @@ public class LoginController {
 
 
     /**
-     * Schließt das aktuelle fxml und leitet zum Spielfeld ("settings.fxml") weiter.
+     * Closes the current FXML file and forwards to the Settings Page
      * @throws IOException
      */
     public void changeSceneSetting() throws IOException {
@@ -124,6 +153,7 @@ public class LoginController {
 
         stage.setTitle("Chess");
         scene.setFill(Color.TRANSPARENT);
+        scene.getStylesheets().add(LoginController.class.getResource("color.css").toExternalForm());
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
         stage.setResizable(false);
@@ -131,7 +161,7 @@ public class LoginController {
     }
 
     /**
-     * Schließt das aktuelle fxml und leitet zum Spielfeld ("login.fxml") weiter.
+     * Closes the current FXML file and forwards to the Login Page
      * @throws IOException
      */
     public void changeSceneLogin() throws IOException {
@@ -141,7 +171,7 @@ public class LoginController {
         stageclose.close();
 
         final FXMLLoader fxmlLoader = new FXMLLoader();
-        URL u = HelloApplication.class.getResource("login.fxml");
+        URL u = HelloApplication.class.getResource("testlogindesign.fxml");
 
         assert u != null;
         Scene scene = new Scene(fxmlLoader.load(u.openStream()));
@@ -151,6 +181,7 @@ public class LoginController {
 
         stage.setTitle("Chess");
         scene.setFill(Color.TRANSPARENT);
+        scene.getStylesheets().add(LoginController.class.getResource("color.css").toExternalForm());
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
         stage.setResizable(false);
