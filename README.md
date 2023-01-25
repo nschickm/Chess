@@ -21,7 +21,8 @@
 
 5. The database is added
 
-![image](https://user-images.githubusercontent.com/83589343/208867825-c4e184cd-36c1-4fc3-b6ed-27da6d63a655.png)
+![image](https://user-images.githubusercontent.com/83589343/214510529-daf33236-0d10-442a-9ea2-442eee16d23c.png)
+
 
 
 
