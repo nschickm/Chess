@@ -18,76 +18,77 @@ public class Knight extends Piece {
         }
 
         if (y + 2 < MAX_Y) {
-            if (x-- >= 0) {
-                if (board[x--][y + 2] == null) {
-                    possibleMoves[x--][y + 2] = true;
-                } else if (!Objects.equals(board[x--][y + 2].color, color)) {
-                    possibleMoves[x--][y + 2] = true;
+            if (x - 1 >= 0) {
+                if (board[x - 1][y + 2] == null) {
+                    possibleMoves[x - 1][y + 2] = true;
+                } else if (!Objects.equals(board[x - 1][y + 2].color, color)) {
+                    possibleMoves[x - 1][y + 2] = true;
                 }
             }
 
-            if (x++ < MAX_X) {
-                if (board[x++][y + 2] == null) {
-                    possibleMoves[x++][y + 2] = true;
-                } else if (!Objects.equals(board[x++][y + 2].color, color)) {
-                    possibleMoves[x++][y + 2] = true;
+            if (x + 1 < MAX_X) {
+                if (board[x + 1][y + 2] == null) {
+                    possibleMoves[x + 1][y + 2] = true;
+                } else if (!Objects.equals(board[x + 1][y + 2].color, color)) {
+                    possibleMoves[x + 1][y + 2] = true;
                 }
             }
         }
 
         if (x + 2 < MAX_X) {
-            if (y-- >= 0) {
-                if (board[x + 2][y--] == null) {
-                    possibleMoves[x + 2][y--] = true;
-                } else if (!Objects.equals(board[x + 2][y--].color, color)) {
-                    possibleMoves[x + 2][y--] = true;
+            if (y - 1 >= 0) {
+                if (board[x + 2][y - 1] == null) {
+                    possibleMoves[x + 2][y - 1] = true;
+                } else if (!Objects.equals(board[x + 2][y - 1].color, color)) {
+                    possibleMoves[x + 2][y - 1] = true;
                 }
             }
 
-            if (y++ < MAX_Y) {
-                if (board[x + 2][y++] == null) {
-                    possibleMoves[x + 2][y++] = true;
-                } else if (!Objects.equals(board[x + 2][y++].color, color)) {
-                    possibleMoves[x + 2][y++] = true;
+            if (y + 1 < MAX_Y) {
+                if (board[x + 2][y + 1] == null) {
+                    possibleMoves[x + 2][y + 1] = true;
+                } else if (!Objects.equals(board[x + 2][y + 1].color, color)) {
+                    possibleMoves[x + 2][y + 1] = true;
                 }
             }
         }
 
         if (y - 2 >= 0) {
-            if (x-- >= 0) {
-                if (board[x--][y - 2] == null) {
-                    possibleMoves[x--][y - 2] = true;
-                } else if (!Objects.equals(board[x--][y - 2].color, color)) {
-                    possibleMoves[x--][y - 2] = true;
+            if (x - 1 >= 0) {
+                if (board[x - 1][y - 2] == null) {
+                    possibleMoves[x - 1][y - 2] = true;
+                } else if (!Objects.equals(board[x - 1][y - 2].color, color)) {
+                    possibleMoves[x - 1][y - 2] = true;
                 }
             }
 
-            if (x++ < MAX_X) {
-                if (board[x++][y - 2] == null) {
-                    possibleMoves[x++][y - 2] = true;
-                } else if (!Objects.equals(board[x++][y - 2].color, color)) {
-                    possibleMoves[x++][y - 2] = true;
+            if (x + 1 < MAX_X) {
+                if (board[x + 1][y - 2] == null) {
+                    possibleMoves[x + 1][y - 2] = true;
+                } else if (!Objects.equals(board[x + 1][y - 2].color, color)) {
+                    possibleMoves[x + 1][y - 2] = true;
                 }
             }
         }
 
         if (x - 2 >= 0) {
-            if (y-- >= 0) {
-                if (board[x - 2][y--] == null) {
-                    possibleMoves[x - 2][y--] = true;
-                } else if (!Objects.equals(board[x - 2][y--].color, color)) {
-                    possibleMoves[x - 2][y--] = true;
+            if (y - 1 >= 0) {
+                if (board[x - 2][y - 1] == null) {
+                    possibleMoves[x - 2][y - 1] = true;
+                } else if (!Objects.equals(board[x - 2][y - 1].color, color)) {
+                    possibleMoves[x - 2][y - 1] = true;
                 }
             }
 
-            if (y++ < MAX_Y) {
-                if (board[x - 2][y++] == null) {
-                    possibleMoves[x - 2][y++] = true;
-                } else if (!Objects.equals(board[x - 2][y++].color, color)) {
-                    possibleMoves[x - 2][y++] = true;
+            if (y + 1 < MAX_Y) {
+                if (board[x - 2][y + 1] == null) {
+                    possibleMoves[x - 2][y + 1] = true;
+                } else if (!Objects.equals(board[x - 2][y + 1].color, color)) {
+                    possibleMoves[x - 2][y + 1] = true;
                 }
             }
         }
+
         return possibleMoves;
     }
 }
