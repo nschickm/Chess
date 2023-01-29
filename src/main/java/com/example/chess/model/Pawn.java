@@ -18,45 +18,45 @@ public class Pawn extends Piece {
         }
 
         if (Objects.equals(color, WHITE)) {
-            if (board[x][y++] == null) {
-                possibleMoves[x][y++] = true;
+            if (board[x][y + 1] == null) {
+                possibleMoves[x][y + 1] = true;
             }
 
-            if (y == 2 && board[x][y++] == null && board[x][y + 2] == null) {
+            if (y == 1 && board[x][y + 1] == null && board[x][y + 2] == null) {
                 possibleMoves[x][y + 2] = true;
             }
 
-            if (board[x++][y++] != null) {
-                if (Objects.equals(board[x++][y++].color, BLACK)) {
-                    possibleMoves[x++][y++] = true;
+            if (board[x + 1][y + 1] != null) {
+                if (Objects.equals(board[x + 1][y + 1].color, BLACK)) {
+                    possibleMoves[x + 1][y + 1] = true;
                 }
             }
 
-            if (board[x--][y++] != null) {
-                if (Objects.equals(board[x--][y++].color, BLACK)) {
-                    possibleMoves[x++][y++] = true;
+            if (board[x - 1][y + 1] != null) {
+                if (Objects.equals(board[x - 1][y + 1].color, BLACK)) {
+                    possibleMoves[x + 1][y + 1] = true;
                 }
             }
         }
 
         if (Objects.equals(color, BLACK)) {
-            if (board[x][y--] == null) {
-                possibleMoves[x][y--] = true;
+            if (board[x][y - 1] == null) {
+                possibleMoves[x][y - 1] = true;
             }
 
-            if (y == 6 && board[x][y--] == null && board[x][y - 2] == null) {
+            if (y == 6 && board[x][y - 1] == null && board[x][y - 2] == null) {
                 possibleMoves[x][y - 2] = true;
             }
 
-            if (board[x++][y--] != null) {
-                if (Objects.equals(board[x++][y--].color, WHITE)) {
-                    possibleMoves[x++][y--] = true;
+            if (board[x + 1][y - 1] != null) {
+                if (Objects.equals(board[x + 1][y - 1].color, WHITE)) {
+                    possibleMoves[x + 1][y - 1] = true;
                 }
             }
 
-            if (board[x--][y--] != null) {
-                if (Objects.equals(board[x--][y--].color, WHITE)) {
-                    possibleMoves[x++][y++] = true;
+            if (board[x - 1][y - 1] != null) {
+                if (Objects.equals(board[x - 1][y - 1].color, WHITE)) {
+                    possibleMoves[x + 1][y + 1] = true;
                 }
             }
         }
