@@ -12,7 +12,8 @@ public class King extends Piece {
     }
 
     /**
-     *  Checks all the possible moves for King piece
+     * Checks all the possible moves for King piece
+     *
      * @param board
      * @return
      */
@@ -25,57 +26,69 @@ public class King extends Piece {
             }
         }
 
-
-        if (board[x++][y] == null) {
-            possibleMoves[x++][y] = true;
-        } else if (!Objects.equals(board[x++][y].color, color)) {
-            possibleMoves[x++][y] = true;
+        if (x + 1 < MAX_X) {
+            if (board[x + 1][y] == null) {
+                possibleMoves[x + 1][y] = true;
+            } else if (!Objects.equals(board[x + 1][y].color, color)) {
+                possibleMoves[x + 1][y] = true;
+            }
         }
 
-        if (board[x--][y] == null) {
-            possibleMoves[x--][y] = true;
-        } else if (!Objects.equals(board[x--][y].color, color)) {
-            possibleMoves[x--][y] = true;
+        if (x - 1 >= 0) {
+            if (board[x - 1][y] == null) {
+                possibleMoves[x - 1][y] = true;
+            } else if (!Objects.equals(board[x - 1][y].color, color)) {
+                possibleMoves[x - 1][y] = true;
+            }
         }
 
-
-        if (board[x++][y++] == null) {
-            possibleMoves[x++][y++] = true;
-        } else if (!Objects.equals(board[x++][y++].color, color)) {
-            possibleMoves[x++][y++] = true;
+        if (x + 1 < MAX_X && y + 1 < MAX_Y) {
+            if (board[x + 1][y + 1] == null) {
+                possibleMoves[x + 1][y + 1] = true;
+            } else if (!Objects.equals(board[x + 1][y + 1].color, color)) {
+                possibleMoves[x + 1][y + 1] = true;
+            }
         }
 
-        if (board[x--][y++] == null) {
-            possibleMoves[x--][y++] = true;
-        } else if (!Objects.equals(board[x--][y++].color, color)) {
-            possibleMoves[x--][y++] = true;
+        if (x - 1 >= 0 && y + 1 < MAX_Y) {
+            if (board[x - 1][y + 1] == null) {
+                possibleMoves[x - 1][y + 1] = true;
+            } else if (!Objects.equals(board[x - 1][y + 1].color, color)) {
+                possibleMoves[x - 1][y + 1] = true;
+            }
         }
 
-        if (board[x][y++] == null) {
-            possibleMoves[x][y++] = true;
-        } else if (!Objects.equals(board[x][y++].color, color)) {
-            possibleMoves[x][y++] = true;
+        if (y + 1 < MAX_Y) {
+            if (board[x][y + 1] == null) {
+                possibleMoves[x][y + 1] = true;
+            } else if (!Objects.equals(board[x][y + 1].color, color)) {
+                possibleMoves[x][y + 1] = true;
+            }
         }
 
-
-        if (board[x++][y--] == null) {
-            possibleMoves[x++][y--] = true;
-        } else if (!Objects.equals(board[x++][y--].color, color)) {
-            possibleMoves[x++][y--] = true;
+        if (x + 1 < MAX_X && y - 1 >= 0) {
+            if (board[x + 1][y - 1] == null) {
+                possibleMoves[x + 1][y - 1] = true;
+            } else if (!Objects.equals(board[x + 1][y - 1].color, color)) {
+                possibleMoves[x + 1][y - 1] = true;
+            }
         }
 
-        if (board[x--][y--] == null) {
-            possibleMoves[x--][y--] = true;
-        } else if (!Objects.equals(board[x--][y--].color, color)) {
-            possibleMoves[x--][y--] = true;
+        if (x - 1 >= 0 && y - 1 >= 0) {
+            if (board[x - 1][y - 1] == null) {
+                possibleMoves[x - 1][y - 1] = true;
+            } else if (!Objects.equals(board[x - 1][y - 1].color, color)) {
+                possibleMoves[x - 1][y - 1] = true;
+            }
         }
 
-        if (board[x][y--] == null) {
-            possibleMoves[x][y--] = true;
-        } else if (!Objects.equals(board[x][y--].color, color)) {
-            possibleMoves[x][y--] = true;
+        if (y - 1 >= 0) {
+            if (board[x][y - 1] == null) {
+                possibleMoves[x][y - 1] = true;
+            } else if (!Objects.equals(board[x][y - 1].color, color)) {
+                possibleMoves[x][y - 1] = true;
+            }
         }
-
 
         return possibleMoves;
     }
