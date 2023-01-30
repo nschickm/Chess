@@ -1,3 +1,5 @@
-.gridPane {
-
+.field {
+    -fx-background-color: 0xee82eeff;
+}.field1 {
+    -fx-background-color: 0xffff00ff;
 }

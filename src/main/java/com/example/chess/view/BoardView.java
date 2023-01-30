@@ -64,7 +64,7 @@ public class BoardView {
                     images.get(images.size() - 1).setFitHeight(87.5);
                     images.get(images.size() - 1).setFitWidth(87.5);
 
-                    gridPane.add(images.get(images.size() - 1), i, j);
+                    gridPane.add(images.get(images.size() - 1), i, Piece.MAX_Y - j - 1);
                 }
 
             }
@@ -87,8 +87,9 @@ public class BoardView {
 
                     images.get(images.size() - 1).setFitHeight(87.5);
                     images.get(images.size() - 1).setFitWidth(87.5);
+                    images.get(images.size() - 1).setOpacity(0.2);
 
-                    gridPane.add(images.get(images.size() - 1), i, j);
+                    gridPane.add(images.get(images.size() - 1), i, Piece.MAX_Y - j - 1);
                 }
             }
         }

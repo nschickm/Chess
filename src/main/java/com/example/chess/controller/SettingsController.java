@@ -12,6 +12,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 
@@ -23,7 +25,6 @@ public class SettingsController extends AbstractController {
     public static Color color1;
     public static Color color2;
     public static double time;
-
 
 
     public void initialize() {
@@ -69,6 +70,19 @@ public class SettingsController extends AbstractController {
                 color1 = Color.WHITE;
                 color2 = Color.BLACK;
 
+            }
+
+            File file = new File("src/main/resources/com/example/chess/controller/board.css");
+            try (FileWriter writer = new FileWriter(file)) {
+                writer.write(".field {\n" +
+                        "    -fx-background-color: " + color1 + ";\n" +
+                        "}" +
+                        ".field1 {\n" +
+                        "    -fx-background-color: " + color2 + ";\n" +
+                        "}");
+                writer.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
 

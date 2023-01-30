@@ -47,6 +47,8 @@ public class BoardController extends AbstractController {
     public void gameStart() {
         boardView.drawBoard();
 
+        player1 = new Player("Mani 1", Piece.WHITE, 1);
+        player2 = new Player("Mani 2", Piece.BLACK, 1);
         currentPlayer = player1;
     }
 
