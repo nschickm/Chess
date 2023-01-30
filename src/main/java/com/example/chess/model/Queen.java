@@ -8,6 +8,11 @@ public class Queen extends Piece {
         name = "queen";
     }
 
+    /**
+     * Checks all the possible moves for Queen piece
+     *
+     * @return board [][] with TRUE in every field possible and FALSE if not
+     */
     @Override
     public Boolean[][] getPossibleMoves(Piece[][] board) {
         Boolean[][] possibleMoves = new Boolean[MAX_X][MAX_Y];
@@ -17,110 +22,14 @@ public class Queen extends Piece {
             }
         }
 
-        for (int i = 0; i < MAX_X - x; i++) {
-            if (board[x + i][y] == null) {
-                possibleMoves[x + i][y] = true;
-            } else if (!Objects.equals(board[x + i][y].color, color)) {
-                possibleMoves[x + i][y] = true;
-                i = MAX_X - x;
-            }
-        }
-
-        for (int i = 0; i < x; i++) {
-            if (board[x - i][y] == null) {
-                possibleMoves[x - i][y] = true;
-            } else if (!Objects.equals(board[x - i][y].color, color)) {
-                possibleMoves[x - i][y] = true;
-                i = x;
-            }
-        }
-
-        for (int i = 0; i < MAX_Y - y; i++) {
-            if (board[x][y + i] == null) {
-                possibleMoves[x][y + i] = true;
-            } else if (!Objects.equals(board[x][y + i].color, color)) {
-                possibleMoves[x][y + i] = true;
-                i = MAX_Y - y;
-            }
-        }
-
-        for (int i = 0; i < y; i++) {
-            if (board[x][y - i] == null) {
-                possibleMoves[x][y - i] = true;
-            } else if (!Objects.equals(board[x][y - i].color, color)) {
-                possibleMoves[x][y - i] = true;
-                i = y;
-            }
-        }
-        for (int i = 0; i < MAX_Y; i++) {
-            if (board[x + i][y + i] == null) {
-                possibleMoves[x + i][y + i] = true;
-            } else if (!Objects.equals(board[x + i][y + i].color, color)) {
-                possibleMoves[x + i][y + i] = true;
-                i = MAX_Y;
-            }
-        }
-
-        for (int i = 0; i < MAX_Y; i++) {
-            if (board[x - i][y + i] == null) {
-                possibleMoves[x - i][y + i] = true;
-            } else if (!Objects.equals(board[x - i][y + i].color, color)) {
-                possibleMoves[x - i][y + i] = true;
-                i = MAX_Y;
-            }
-        }
+        Boolean[][] possibleMovesBishop = new Bishop(x, y, color).getPossibleMoves(board);
+        Boolean[][] possibleMovesRook = new Rook(x, y, color).getPossibleMoves(board);
 
         for (int i = 0; i < MAX_X; i++) {
-            if (board[x + i][y - i] == null) {
-                possibleMoves[x + i][y - i] = true;
-            } else if (!Objects.equals(board[x + i][y - i].color, color)) {
-                possibleMoves[x + i][y - i] = true;
-                i = MAX_X;
-            }
-        }
-
-        for (int i = 0; i < MAX_X; i++) {
-            if (board[x - i][y - i] == null) {
-                possibleMoves[x - i][y - i] = true;
-            } else if (!Objects.equals(board[x - i][y - i].color, color)) {
-                possibleMoves[x - i][y - i] = true;
-                i = MAX_X;
-            }
-        }
-
-        for (int i = 0; i < MAX_Y - y && i < MAX_X - x; i++) {
-            if (board[x + i][y + i] == null) {
-                possibleMoves[x + i][y + i] = true;
-            } else if (!Objects.equals(board[x + i][y + i].color, color)) {
-                possibleMoves[x + i][y + i] = true;
-                i = MAX_Y;
-            }
-        }
-
-        for (int i = 0; i < MAX_Y - y && i < x; i++) {
-            if (board[x - i][y + i] == null) {
-                possibleMoves[x - i][y + i] = true;
-            } else if (!Objects.equals(board[x - i][y + i].color, color)) {
-                possibleMoves[x - i][y + i] = true;
-                i = MAX_Y;
-            }
-        }
-
-        for (int i = 0; i < MAX_X - x && i < y; i++) {
-            if (board[x + i][y - i] == null) {
-                possibleMoves[x + i][y - i] = true;
-            } else if (!Objects.equals(board[x + i][y - i].color, color)) {
-                possibleMoves[x + i][y - i] = true;
-                i = MAX_X;
-            }
-        }
-
-        for (int i = 0; i < x && i < y; i++) {
-            if (board[x - i][y - i] == null) {
-                possibleMoves[x - i][y - i] = true;
-            } else if (!Objects.equals(board[x - i][y - i].color, color)) {
-                possibleMoves[x - i][y - i] = true;
-                i = MAX_X;
+            for (int j = 0; j < MAX_Y; j++) {
+                if (possibleMovesBishop[i][j] || possibleMovesRook[i][j]) {
+                    possibleMoves[i][j] = true;
+                }
             }
         }
 

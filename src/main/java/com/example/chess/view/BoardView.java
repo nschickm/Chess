@@ -78,4 +78,19 @@ public class BoardView {
                 ", board=" + Arrays.toString(board) +
                 '}';
     }
+
+    public void drawPossibleMoves(Boolean[][] possibleMoves) {
+        for (int i = 0; i < Piece.MAX_X; i++) {
+            for (int j = 0; j < Piece.MAX_Y; j++) {
+                if (possibleMoves[i][j]) {
+                    images.add(new ImageView("selected.png"));
+
+                    images.get(images.size() - 1).setFitHeight(87.5);
+                    images.get(images.size() - 1).setFitWidth(87.5);
+
+                    gridPane.add(images.get(images.size() - 1), i, j);
+                }
+            }
+        }
+    }
 }

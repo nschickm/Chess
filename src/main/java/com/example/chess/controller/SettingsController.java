@@ -72,8 +72,6 @@ public class SettingsController extends AbstractController {
             }
         }
 
-
-
         try {
             BoardController c = this.loadFxmlFile(
                     "board.fxml",
