@@ -1,5 +1,5 @@
 .field {
-    -fx-background-color: 0xee82eeff;
+    -fx-background-color: grey;
 }.field1 {
-    -fx-background-color: 0xffff00ff;
+    -fx-background-color: white;
 }

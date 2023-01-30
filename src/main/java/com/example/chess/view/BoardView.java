@@ -1,11 +1,13 @@
 package com.example.chess.view;
 
 import com.example.chess.model.Piece;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class BoardView {
@@ -19,6 +21,13 @@ public class BoardView {
     }
 
     public void drawBoard() {
+        List<Node> toRemove = new ArrayList<>();
+        for (Node node : gridPane.getChildren()) {
+            if (node instanceof ImageView) {
+                toRemove.add(node);
+            }
+        }
+        gridPane.getChildren().removeAll(toRemove);
 
         for (int i = 0; i < Piece.MAX_X; i++) {
             for (int j = 0; j < Piece.MAX_Y; j++) {

@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class BoardController extends AbstractController {
@@ -34,7 +35,6 @@ public class BoardController extends AbstractController {
 
     private Piece[][] board = new Piece[Piece.MAX_X][Piece.MAX_Y];
     private BoardView boardView;
-    private Boolean isPieceSelected = false;
     private Boolean[][] possibleMoves = new Boolean[Piece.MAX_X][Piece.MAX_Y];
     private Piece selected;
     private Player currentPlayer;
@@ -78,40 +78,35 @@ public class BoardController extends AbstractController {
 
     @FXML
     void fieldClicked(MouseEvent event) {
-        if (!isPieceSelected) {
-            Node node = event.getPickResult().getIntersectedNode();
+        Node node = event.getPickResult().getIntersectedNode();
 
-            int col = GridPane.getColumnIndex(node);
-            int row = GridPane.getRowIndex(node);
-
-            System.out.println(col);
-            System.out.println(Piece.MAX_Y - row - 1);
+        int col = GridPane.getColumnIndex(node);
+        int row = GridPane.getRowIndex(node);
+        if (selected == null) {
             selected = board[col][Piece.MAX_Y - row - 1];
-            System.out.println(board[3][1].toString());
+
             if (Objects.equals(selected.getColor(), currentPlayer.getColor())) {
 
-                isPieceSelected = true;
                 possibleMoves = board[col][Piece.MAX_Y - row - 1].getPossibleMoves(board);
                 boardView.drawPossibleMoves(possibleMoves);
-
             }
         } else {
             try {
-                Node node = event.getPickResult().getIntersectedNode();
-
-                int col = GridPane.getColumnIndex(node);
-                int row = GridPane.getRowIndex(node);
-
                 int kingX = -1;
                 int kingY = -1;
 
                 if (possibleMoves[col][Piece.MAX_Y - row - 1]) {
+
                     for (int i = 0; i < Piece.MAX_X; i++) {
                         for (int j = 0; j < Piece.MAX_Y; j++) {
                             if (board[i][j] == selected) {
                                 board[i][j] = null;
                                 i = Piece.MAX_X;
                                 j = Piece.MAX_Y;
+                            }
+                        }
+                    }
+                        /*
                             }
 
                             if (board[i][j] != null) {
@@ -139,10 +134,12 @@ public class BoardController extends AbstractController {
                     }
 
                     if (!isChecked) {
-                        selected.move(col, Piece.MAX_Y - row - 1);
-                        board[selected.getX()][selected.getY()] = selected;
+                    board[selected.getX()][selected.getY()] = selected;
+                    selected.move(col, Piece.MAX_Y - row - 1);
                     }
-
+*/
+                    board[col][Piece.MAX_Y - row - 1] = selected;
+                    selected.move(col, Piece.MAX_Y - row - 1);
 
                     if (currentPlayer == player1) {
                         currentPlayer = player2;
@@ -158,9 +155,9 @@ public class BoardController extends AbstractController {
                 e.printStackTrace();
             }
 
+            System.out.println(Arrays.deepToString(board).replace("]", "]\n"));
             possibleMoves = null;
             selected = null;
-            isPieceSelected = false;
             boardView.drawBoard();
         }
 
