@@ -90,6 +90,21 @@ public class King extends Piece {
             }
         }
 
+        for (int i = 0; i < Piece.MAX_X; i++) {
+            for (int j = 0; j < Piece.MAX_Y; j++) {
+                if (!Objects.equals(board[i][j].getColor(), color) && !Objects.equals(board[i][j].getName(), "king")) {
+                    Boolean[][] PiecePossibleMoves = board[i][j].getPossibleMoves(board);
+                    for (int k = 0; k < Piece.MAX_X; k++) {
+                        for (int l = 0; l < Piece.MAX_Y; l++) {
+                            if (PiecePossibleMoves[k][l]) {
+                                possibleMoves[i][j] = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         return possibleMoves;
     }
 }
