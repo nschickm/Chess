@@ -22,8 +22,8 @@ public class SettingsController extends AbstractController {
     public JFXButton startBttn;
     public JFXComboBox comboBoxTheme;
 
-    public static Color color1;
-    public static Color color2;
+    public static String color1;
+    public static String color2;
     public static double time;
 
 
@@ -40,7 +40,52 @@ public class SettingsController extends AbstractController {
 
     }
 
-    public void startBttnClicked(ActionEvent actionEvent) {
+    public void startBttnClicked(ActionEvent actionEvent) throws IOException {
+
+        if (!comboBoxTheme.getSelectionModel().isEmpty()) {
+
+            if (comboBoxTheme.getValue().equals("Sunset")) {
+                color1 = "BLUE";
+                color2 = "ORANGE";
+
+            } else if (comboBoxTheme.getValue().equals("Royalty")) {
+                color1 = "VIOLET";
+                color2 = "YELLOW";
+
+            } else if (comboBoxTheme.getValue().equals("Blossom")) {
+                color1 = "GREEN";
+                color2 = "PINK";
+
+            } else if (comboBoxTheme.getValue().equals("No Theme")) {
+                color1 = "WHITE";
+                color2 = "BLACK";
+
+            }
+            System.out.println(color1 + " und " + color2);
+
+            File file = new File("src/main/resources/com/example/chess/controller/board.css");
+            FileWriter writer = null;
+            try {
+                writer = new FileWriter(file);
+                writer.write(".field {\n" +
+                        "    -fx-background-color:" + color1 + ";\n" +
+                        "}" +
+                        ".field1 {\n" +
+                        "    -fx-background-color:" + color2 + ";\n" +
+                        "}");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (writer != null) {
+                        writer.flush();
+                        writer.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         if (comboBox.getValue().equals("5 minutes")) {
             time = 300000;
@@ -52,39 +97,6 @@ public class SettingsController extends AbstractController {
             time = 1200000;
         }
 
-        if (!comboBoxTheme.getSelectionModel().isEmpty()) {
-
-            if (comboBoxTheme.getValue().equals("Sunset")) {
-                color1 = Color.BLUE;
-                color2 = Color.ORANGE;
-
-            } else if (comboBoxTheme.getValue().equals("Royalty")) {
-                color1 = Color.VIOLET;
-                color2 = Color.YELLOW;
-
-            } else if (comboBoxTheme.getValue().equals("Blossom")) {
-                color1 = Color.GREEN;
-                color2 = Color.PINK;
-
-            } else if (comboBoxTheme.getValue().equals("No Theme")) {
-                color1 = Color.WHITE;
-                color2 = Color.BLACK;
-
-            }
-
-            File file = new File("src/main/resources/com/example/chess/controller/board.css");
-            try (FileWriter writer = new FileWriter(file)) {
-                writer.write(".field {\n" +
-                        "    -fx-background-color: " + color1 + ";\n" +
-                        "}" +
-                        ".field1 {\n" +
-                        "    -fx-background-color: " + color2 + ";\n" +
-                        "}");
-                writer.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
 
         try {
             BoardController c = this.loadFxmlFile(

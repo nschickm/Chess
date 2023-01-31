@@ -20,10 +20,8 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class LoginController extends AbstractController{
     public TextField username;
@@ -40,13 +38,15 @@ public class LoginController extends AbstractController{
     private static String checkname = "";
     public Label sameNameErrorMsg;
     public ImageView imgViewBoard;
+    public static String player1name;
+    public static String player2name;
 
 
 
     public void initialize() {
+
         Image image = new Image("chessboardPNG.png");
         imgViewBoard.setImage(image);
-
 
 
         sameNameErrorMsg.setVisible(false);
@@ -93,6 +93,7 @@ public class LoginController extends AbstractController{
             // login -> weiterleiten
             System.out.println("Account verhanden!");
 
+
             if(checkname.equals(this.username.getText())){
                 System.out.println("Fehler gleicher Name");
                 countplayers--;
@@ -100,6 +101,7 @@ public class LoginController extends AbstractController{
             }
 
             if(countplayers == 1){
+                player2name = username.getText();
 
                 SettingsController c = this.loadFxmlFile(
                         "settings.fxml",
@@ -112,6 +114,8 @@ public class LoginController extends AbstractController{
 
 
             }else {
+                player1name = username.getText();
+
                 countplayers++;
                 checkname = this.username.getText();
 
@@ -152,11 +156,7 @@ public class LoginController extends AbstractController{
             throw new RuntimeException(e);
         }
 
-
     }
-
-
-
 
 
     public TextField getUsername() {

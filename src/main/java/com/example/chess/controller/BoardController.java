@@ -15,7 +15,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Objects;
+
+import static com.example.chess.controller.LoginController.player1name;
+import static com.example.chess.controller.LoginController.player2name;
 
 public class BoardController extends AbstractController {
     @FXML
@@ -40,16 +45,23 @@ public class BoardController extends AbstractController {
     private Player currentPlayer;
     private Boolean isChecked;
     private Player winner = null;
+    private Player loser = null;
     private String drawType;
     private Player player1;
     private Player player2;
 
-    public void gameStart() {
+    public void gameStart() throws SQLException {
         boardView.drawBoard();
 
         player1 = new Player("Mani 1", Piece.WHITE, 1);
         player2 = new Player("Mani 2", Piece.BLACK, 1);
         currentPlayer = player1;
+
+        ratingPlayer1.setText(boardView.showPlayer1Data());
+        ratingPlayer2.setText(boardView.showPlayer2Data());
+        namePlayer1.setText(player1name);
+        namePlayer2.setText(player2name);
+
     }
 
     public void gameEnd() {
@@ -57,8 +69,11 @@ public class BoardController extends AbstractController {
         alert.setTitle("Game End");
         if (winner != null) {
             alert.setContentText(winner.getName() + " won the game");
+            boardView.setWin(winner.getName());
+            boardView.setLose(loser.getName());
         } else {
             alert.setContentText("The game ended by " + drawType);
+            boardView.setDraw();
         }
 
         for (int i = 0; i < Piece.MAX_X; i++) {
@@ -171,14 +186,16 @@ public class BoardController extends AbstractController {
     public void resignButtonClicked(ActionEvent actionEvent) {
         if (currentPlayer == player1) {
             winner = player2;
+            loser = player1;
         } else {
             winner = player1;
+            loser = player2;
         }
 
         gameEnd();
     }
 
-    public void initialize() {
+    public void initialize() throws SQLException {
 
         board[0][0] = new Rook(0, 0, Piece.WHITE);
         board[1][0] = new Knight(1, 0, Piece.WHITE);
@@ -208,6 +225,5 @@ public class BoardController extends AbstractController {
 
         gameStart();
     }
-
 
 }

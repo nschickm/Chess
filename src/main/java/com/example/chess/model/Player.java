@@ -1,10 +1,11 @@
 package com.example.chess.model;
 
+import com.example.chess.controller.AbstractController;
 import javafx.scene.paint.Color;
 
 import java.sql.ResultSet;
 
-public class Player {
+public class Player extends AbstractController {
     private String name;
     private String color;
     private double timeInMillis;
@@ -16,7 +17,13 @@ public class Player {
         this.timeInMillis = timeInMillis;
     }
 
-    public Player(ResultSet results) {
+
+    public Player(String name) {
+        this.name = name;
+    }
+
+    public Player() {
+
     }
 
     public String getName() {

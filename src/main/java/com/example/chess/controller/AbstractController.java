@@ -17,9 +17,6 @@ public abstract class AbstractController implements PublisherInterface<Boolean> 
 
     private Stage stage = null;
 
-    protected Player p1;
-    protected Player p2;
-
     private ArrayList<SubscriberInterface<Boolean>> list = new ArrayList<>();
 
     public <T extends AbstractController> T loadFxmlFile(String path, String title, Window owner, Class<T> classOfController) throws IOException {
