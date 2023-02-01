@@ -6,7 +6,7 @@ package com.example.chess.model;
  * It has methods to return an array of booleans indicating the possible moves a piece can make on a chess board,
  * to move the piece to a new position on the board,
  *
- * @author
+ * @author decker
  */
 public abstract class Piece {
     public static String WHITE = "white";

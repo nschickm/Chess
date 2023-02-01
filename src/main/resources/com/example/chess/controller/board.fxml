@@ -156,7 +156,7 @@
         </GridPane>
         <JFXButton buttonType="RAISED" layoutX="795.0" layoutY="400.0" onAction="#drawButtonClicked" prefHeight="30"
                    prefWidth="80" styleClass="buttonStyle" stylesheets="@color.css" text="Offer draw"/>
-        <JFXButton buttonType="RAISED" layoutX="885.0" layoutY="400.0" onAction="#drawButtonClicked" prefHeight="30"
+        <JFXButton buttonType="RAISED" layoutX="885.0" layoutY="400.0" onAction="#resignButtonClicked" prefHeight="30"
                    prefWidth="80" styleClass="buttonStyle" stylesheets="@color.css" text="Resign"/>
         <Label fx:id="timePlayer2Label" layoutX="751.0" layoutY="76.0" text="Label">
             <font>

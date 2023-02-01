@@ -23,7 +23,7 @@ import static com.example.chess.controller.LoginController.player2name;
  * BoardView class represents the view component of the chess game
  * It is responsible for visualizing the chessboard and pieces on the chessboard.
  *
- * @author
+ * @author decker
  */
 public class BoardView {
     private GridPane gridPane;

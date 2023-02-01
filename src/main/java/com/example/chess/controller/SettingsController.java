@@ -16,6 +16,12 @@ import javafx.stage.StageStyle;
 import java.io.*;
 import java.net.URL;
 
+/**
+ * The SettingsController class is responsible for controlling the settings of the chess game.
+ * It provides options to select game time and theme color.
+ *
+ * @author nschickm, meder1, decker
+ */
 public class SettingsController extends AbstractController {
     public JFXComboBox comboBox;
     public JFXButton startBttn;
@@ -26,6 +32,9 @@ public class SettingsController extends AbstractController {
     public static double time;
     public Label labelClose;
 
+    /**
+     * Initialize method is used to add options for game time and theme color in the comboBox and comboBoxTheme.
+     */
     public void initialize() {
         comboBox.getItems().addAll(
                 "5 minutes",
@@ -39,6 +48,13 @@ public class SettingsController extends AbstractController {
 
     }
 
+    /**
+     * startBttnClicked method is called when the start button is clicked. It sets the game time and theme color.
+     * It also closes the settings window and opens the board window.
+     *
+     * @param actionEvent the action event that triggers this method
+     * @throws IOException if an I/O error occurs
+     */
     public void startBttnClicked(ActionEvent actionEvent) throws IOException {
 
         Stage stage = (Stage) labelClose.getScene().getWindow();

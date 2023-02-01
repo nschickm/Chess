@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * The Bishop class extends the Piece class and represents a bishop piece in a chess game.
  *
- * @author  Example User
+ * @author decker
  */
 public class Bishop extends Piece {
 

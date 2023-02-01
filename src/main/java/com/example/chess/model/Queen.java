@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * The Queen class extends the Piece class and represents a queen piece in a chess game.
  *
- * @author  Example User
+ * @author decker
  */
 public class Queen extends Piece {
 

@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * The Rook class extends the Piece class and represents a rook piece in a chess game.
  *
- * @author Example User
+ * @author decker
  */
 public class Rook extends Piece {
     /**

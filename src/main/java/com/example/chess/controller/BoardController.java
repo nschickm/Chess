@@ -25,6 +25,13 @@ import java.util.Optional;
 import static com.example.chess.controller.LoginController.player1name;
 import static com.example.chess.controller.LoginController.player2name;
 
+/**
+ *
+ * The BoardController class manages the functionality of the chess game. It implements the game logic,
+ * updates the game state and communicates with other classes.
+ *
+ * @author decker, meder1, nschickm
+ */
 public class BoardController extends AbstractController {
     @FXML
     private GridPane gridPane = new GridPane();
@@ -55,6 +62,11 @@ public class BoardController extends AbstractController {
     private double timeBetweenMoves = System.currentTimeMillis();
     private DatabaseHandler databaseHandler = new DatabaseHandler();
 
+    /**
+     * Starts the chess game by initializing the game state and starting the game timer.
+     *
+     * @throws SQLException if there is a database error.
+     */
     public void gameStart() throws SQLException {
         boardView.drawBoard();
 
@@ -99,6 +111,14 @@ public class BoardController extends AbstractController {
         namePlayer2Label.setText(player2name);
     }
 
+    /**
+     * This function handles the end of a game by showing an alert to the user.
+     * The alert asks the user if they want to play again or close the game.
+     * If the user decides to play again, the game will start from the login screen.
+     * If the user decides to close the game, the game will be closed.
+     *
+     * @throws IOException if there is an I/O error when opening the FXML file.
+     */
     public void gameEnd() throws IOException, IOException {
         Stage stage = (Stage) timePlayer2Label.getScene().getWindow();
         stage.close();
@@ -153,6 +173,13 @@ public class BoardController extends AbstractController {
         }
     }
 
+    /**
+     * Handles the event of a field on the board being clicked.
+     * The function selects a piece, if the user clicked on a piece, and displays the possible moves.
+     * If the user selected a piece and clicked on a possible move, the piece will move to the clicked location.
+     *
+     * @param event the mouse event that triggered this function.
+     */
     @FXML
     void fieldClicked(MouseEvent event) {
         Node node = event.getPickResult().getIntersectedNode();
@@ -165,6 +192,7 @@ public class BoardController extends AbstractController {
                 selected = board[col][Piece.MAX_Y - row - 1];
 
                 if (Objects.equals(selected.getColor(), currentPlayer.getColor())) {
+
                     possibleMoves = board[col][Piece.MAX_Y - row - 1].getPossibleMoves(board);
                     boardView.drawPossibleMoves(possibleMoves);
                 }
@@ -256,12 +284,43 @@ public class BoardController extends AbstractController {
 
     }
 
+    /**
+     * Draw button event handler. Shows a confirmation dialog to the user asking if they want to accept the draw offer.
+     * If the user accepts the draw, the gameEnd() function is called.
+     *
+     * @param actionEvent the action event triggered by clicking the draw button
+     * @throws IOException if an I/O error occurs
+     */
     public void drawButtonClicked(ActionEvent actionEvent) throws IOException {
         drawType = "offered draw";
-        System.out.println("drwa");
-        gameEnd();
+
+        ButtonType acceptDraw = new ButtonType("Accept draw", ButtonBar.ButtonData.OK_DONE);
+        ButtonType continuePlaying = new ButtonType("Continue playing", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to accept the draw offer?",acceptDraw, continuePlaying);
+        alert.setTitle("Draw");
+        alert.setHeaderText(null);
+
+        alert.getDialogPane().setMinHeight(Region.USE_COMPUTED_SIZE);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+
+        if (!result.isPresent()) {
+
+        } else if (result.orElse(continuePlaying) == acceptDraw) {
+            gameEnd();
+        } else if (result.equals(continuePlaying)) {
+
+        }
+
     }
 
+    /**
+     * Resign button event handler. Sets the winner and loser based on the current player and calls the gameEnd() function.
+     *
+     * @param actionEvent the action event triggered by clicking the resign button
+     * @throws IOException if an I/O error occurs
+     */
     public void resignButtonClicked(ActionEvent actionEvent) throws IOException {
         if (currentPlayer == player1) {
             winner = player2;
@@ -274,6 +333,11 @@ public class BoardController extends AbstractController {
         gameEnd();
     }
 
+    /**
+     * Initializes the chess board, creating the pieces and setting up their starting positions.
+     *
+     * @throws SQLException if a database error occurs
+     */
     public void initialize() throws SQLException {
 
         board[0][0] = new Rook(0, 0, Piece.WHITE);

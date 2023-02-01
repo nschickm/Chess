@@ -23,7 +23,13 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class LoginController extends AbstractController{
+/**
+ * LoginController class is the controller class for handling the logic for the Login page.
+ * It contains the logic for checking the entered credentials and handles the navigation to other pages based on the result.
+ *
+ * @author nschickm, meder1
+ */
+public class LoginController extends AbstractController {
     public TextField username;
     public TextField password;
     public Label nameLabel;
@@ -36,20 +42,21 @@ public class LoginController extends AbstractController{
     public AnchorPane anchorPaneTop;
     private static int countplayers = 0;
     private static String checkname = "";
-    public Label sameNameErrorMsg;
     public ImageView imgViewBoard;
     public static String player1name;
     public static String player2name;
 
 
-
+    /**
+     * The initialize method is called automatically when the Login page is loaded.
+     * It sets the prompt text for the passwordEncrypted field, sets the visibility of the password field,
+     * and adds a listener for the checkBoxPassword CheckBox to switch between encrypted and plain text password display.
+     */
     public void initialize() {
 
         Image image = new Image("chessboardPNG.png");
         imgViewBoard.setImage(image);
 
-
-        sameNameErrorMsg.setVisible(false);
         passwordEncrypted.setPromptText("Enter Password");
 
         passwordEncrypted.textProperty().bindBidirectional(password.textProperty());
@@ -57,11 +64,11 @@ public class LoginController extends AbstractController{
         passwordEncrypted.toFront();
         password.setVisible(false);
         checkBoxPassword.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue){
+            if (newValue) {
                 password.toFront();
                 password.setVisible(true);
                 passwordEncrypted.setVisible(false);
-            }else {
+            } else {
                 passwordEncrypted.toFront();
                 password.setVisible(false);
                 passwordEncrypted.setVisible(true);
@@ -75,12 +82,17 @@ public class LoginController extends AbstractController{
     }
 
     /**
-     * Überp
-     * @param actionEvent
-     * @throws SQLException
-     * @throws IOException
+     * The loginbttnclicked method is called when the login button is clicked.
+     * It performs a check for an existing account in the database with the entered username and password.
+     * If the account exists, it sets the player name and loads the next screen based on the number of players.
+     * If the account does not exist, an error message is displayed.
+     *
+     * @param actionEvent the action event that triggers this method
+     * @throws SQLException if a database error occurs
+     * @throws IOException if an I/O error occurs when loading the next screen
      */
     public void loginbttnclicked(ActionEvent actionEvent) throws SQLException, IOException {
+
         Stage stage = (Stage) username.getScene().getWindow();
         stage.close();
 
@@ -90,20 +102,17 @@ public class LoginController extends AbstractController{
         ResultSet resultSet = statement.executeQuery("SELECT * FROM t_user WHERE username = '" + this.username.getText() + "' AND password = '" + PasswordHasher.hashPassword(this.password.getText()) + "';");
 
         if (resultSet.next()) {
-            // login -> weiterleiten
-            System.out.println("Account verhanden!");
 
 
-            if(checkname.equals(this.username.getText())){
+            if (checkname.equals(this.username.getText())) {
                 System.out.println("Fehler gleicher Name");
                 countplayers--;
-               // sameNameErrorMsg.setVisible(true);
             }
 
-            if(countplayers == 1){
+            if (countplayers == 1) {
                 player2name = username.getText();
 
-                SettingsController c = this.loadFxmlFile(
+                this.loadFxmlFile(
                         "settings.fxml",
                         "Settings",
                         ((Button) actionEvent.getSource()).getScene().getWindow(),
@@ -111,15 +120,12 @@ public class LoginController extends AbstractController{
                 );
 
 
-
-
-            }else {
+            } else {
                 player1name = username.getText();
-
                 countplayers++;
                 checkname = this.username.getText();
 
-                LoginController c = this.loadFxmlFile(
+                this.loadFxmlFile(
                         "testlogindesign.fxml",
                         "Player 2 login",
                         null,
@@ -127,19 +133,19 @@ public class LoginController extends AbstractController{
                 );
 
 
-
-
             }
         } else {
-            // kein Account
-            System.out.println("Kein Account, sie muessen sich vorher Registrieren um zu Spielen!");
+            // no account, please create one
         }
     }
 
     /**
-     * The values entered will be added to
-     * @param actionEvent
-     * @throws SQLException
+     * The singUpbttnclicked method is called when the sign up button is clicked.
+     * It creates a new account in the database with the entered username and password.
+     * If the account creation is successful, it calls the loginbttnclicked method to log in to the account.
+     *
+     * @param actionEvent the action event that triggers this method
+     * @throws SQLException if a database error occurs
      */
     public void singUpbttnclicked(ActionEvent actionEvent) throws SQLException {
         Connection connection = Database.getConnection();
@@ -149,10 +155,9 @@ public class LoginController extends AbstractController{
             statement.executeUpdate("INSERT INTO t_user (username, password) VALUES ('" + this.username.getText() + "','" + PasswordHasher.hashPassword(this.password.getText()) + "');");
 
 
-            username.clear();
-            password.clear();
+            loginbttnclicked(actionEvent);
 
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -176,6 +181,8 @@ public class LoginController extends AbstractController{
     }
 
 
-
-
+    public void closeLogin(ActionEvent actionEvent) {
+        Stage stage = (Stage) username.getScene().getWindow();
+        stage.close();
+    }
 }

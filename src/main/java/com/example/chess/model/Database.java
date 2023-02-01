@@ -6,8 +6,6 @@ import java.sql.SQLException;
 
 /**
  * Database is a singleton class that handles the database connection.
- *
- * @author
  */
 public class Database {
 

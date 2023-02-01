@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * The King class extends the Piece class and represents a king piece in a chess game.
  *
- * @author Example User
+ * @author decker
  */
 public class King extends Piece {
 

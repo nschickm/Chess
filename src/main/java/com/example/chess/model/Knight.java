@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * The Knight class extends the Piece class and represents a knight piece in a chess game.
  *
- * @author  Example User
+ * @author decker
  */
 public class Knight extends Piece {
 

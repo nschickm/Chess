@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * The class PasswordHasher provides functionality for hashing passwords.
  *
- * @auther
+ * @auther nschickm
  */
 public class PasswordHasher {
 
