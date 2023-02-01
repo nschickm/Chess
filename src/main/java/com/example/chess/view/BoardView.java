@@ -119,7 +119,7 @@ public class BoardView {
 
                     images.get(images.size() - 1).setFitHeight(87.5);
                     images.get(images.size() - 1).setFitWidth(87.5);
-                    images.get(images.size() - 1).setOpacity(0.2);
+                    images.get(images.size() - 1).setOpacity(0.1);
 
                     gridPane.add(images.get(images.size() - 1), i, Piece.MAX_Y - j - 1);
                 }

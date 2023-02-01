@@ -2,6 +2,7 @@ package com.example.chess.controller;
 
 import com.example.chess.model.*;
 import com.example.chess.view.BoardView;
+import com.jfoenix.controls.JFXButton;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -106,7 +107,7 @@ public class BoardController extends AbstractController {
 
         ButtonType again = new ButtonType("Play again", ButtonBar.ButtonData.OK_DONE);
         ButtonType endGame = new ButtonType("Close game", ButtonBar.ButtonData.CANCEL_CLOSE);
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to play again?",again, endGame);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to play again?", again, endGame);
         alert.setTitle("Game End");
         alert.setHeaderText(null);
 
@@ -140,13 +141,12 @@ public class BoardController extends AbstractController {
         if (!result.isPresent()) {
 
         } else if (result.orElse(endGame) == again) {
-            System.out.println("sdf");
             LoginController l = this.loadFxmlFile(
                     "testlogindesign.fxml",
                     "Player 1 login",
                     null,
                     LoginController.class);
-            //oke button is pressed
+            //ok button is pressed
 
         } else if (result.equals(endGame)) {
             // cancel button is pressed
@@ -221,6 +221,18 @@ public class BoardController extends AbstractController {
 
                         board[col][Piece.MAX_Y - row - 1] = selected;
                         selected.move(col, Piece.MAX_Y - row - 1);
+
+                        if (Objects.equals(selected.getName(), "pawn")) {
+                            if (Objects.equals(selected.getColor(), Piece.WHITE)) {
+                                if ((Piece.MAX_Y - row - 1) == 7) {
+                                    board[col][Piece.MAX_Y - row - 1] = new Queen(selected.getX(), selected.getY(), selected.getColor());
+                                }
+                            } else {
+                                if ((Piece.MAX_Y - row - 1) == 0) {
+                                    board[col][Piece.MAX_Y - row - 1] = new Queen(selected.getX(), selected.getY(), selected.getColor());
+                                }
+                            }
+                        }
 
                         if (currentPlayer == player1) {
                             currentPlayer = player2;

@@ -6,106 +6,187 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="803.0" prefWidth="961.0" styleClass="anchorPane" stylesheets="@board.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.controller.BoardController">
+<?import com.jfoenix.controls.JFXButton?>
+<AnchorPane prefHeight="803.0" prefWidth="961.0" styleClass="anchorPane" stylesheets="@board.css"
+            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.chess.controller.BoardController">
     <children>
-        <GridPane fx:id="gridPane" gridLinesVisible="true" layoutX="38.0" layoutY="26.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#fieldClicked" prefHeight="700.0" prefWidth="700.0" style="-fx-grid-lines-visible: false" stylesheets="@board.css" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="38.0" AnchorPane.topAnchor="38.0">
+        <GridPane fx:id="gridPane" gridLinesVisible="true" layoutX="38.0" layoutY="26.0" maxHeight="-Infinity"
+                  maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#fieldClicked"
+                  prefHeight="700.0" prefWidth="700.0" style="-fx-grid-lines-visible: false" stylesheets="@board.css"
+                  AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="38.0" AnchorPane.topAnchor="38.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.rowIndex="2" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="2" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.rowIndex="4" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="4" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.rowIndex="6" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="6" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="7" GridPane.rowIndex="3" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="6" GridPane.rowIndex="4" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="7" GridPane.rowIndex="5" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="7" GridPane.rowIndex="7" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="1" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.rowIndex="1" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="3" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="5" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.rowIndex="3" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.rowIndex="5" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.rowIndex="7" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="5" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="5" GridPane.rowIndex="6" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="6" GridPane.rowIndex="3" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="6" GridPane.rowIndex="5" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="6" GridPane.rowIndex="7" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="7" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="7" GridPane.rowIndex="4" />
-                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.rowIndex="2"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="1"
+                       GridPane.rowIndex="1"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="2"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="2"
+                       GridPane.rowIndex="2"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="1"
+                       GridPane.rowIndex="3"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.rowIndex="4"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="2"
+                       GridPane.rowIndex="4"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="3"
+                       GridPane.rowIndex="1"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="4"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="4"
+                       GridPane.rowIndex="2"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="3"
+                       GridPane.rowIndex="3"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="1"
+                       GridPane.rowIndex="5"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.rowIndex="6"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="2"
+                       GridPane.rowIndex="6"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="3"
+                       GridPane.rowIndex="5"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="4"
+                       GridPane.rowIndex="4"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="4"
+                       GridPane.rowIndex="6"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="5"
+                       GridPane.rowIndex="3"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="5"
+                       GridPane.rowIndex="1"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="6"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="7"
+                       GridPane.rowIndex="1"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="6"
+                       GridPane.rowIndex="2"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="7"
+                       GridPane.rowIndex="3"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="6"
+                       GridPane.rowIndex="4"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="5"
+                       GridPane.rowIndex="5"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="7"
+                       GridPane.rowIndex="5"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="6"
+                       GridPane.rowIndex="6"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="1"
+                       GridPane.rowIndex="7"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="3"
+                       GridPane.rowIndex="7"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="5"
+                       GridPane.rowIndex="7"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field" GridPane.columnIndex="7"
+                       GridPane.rowIndex="7"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="1"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.rowIndex="1"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="2"
+                       GridPane.rowIndex="1"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="3"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="5"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="1"
+                       GridPane.rowIndex="2"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.rowIndex="3"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="1"
+                       GridPane.rowIndex="4"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.rowIndex="5"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="1"
+                       GridPane.rowIndex="6"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.rowIndex="7"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="2"
+                       GridPane.rowIndex="7"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="2"
+                       GridPane.rowIndex="5"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="2"
+                       GridPane.rowIndex="3"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="3"
+                       GridPane.rowIndex="2"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="3"
+                       GridPane.rowIndex="4"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="3"
+                       GridPane.rowIndex="6"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="4"
+                       GridPane.rowIndex="1"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="4"
+                       GridPane.rowIndex="3"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="4"
+                       GridPane.rowIndex="5"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="4"
+                       GridPane.rowIndex="7"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="5"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="5"
+                       GridPane.rowIndex="2"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="5"
+                       GridPane.rowIndex="4"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="5"
+                       GridPane.rowIndex="6"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="6"
+                       GridPane.rowIndex="1"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="6"
+                       GridPane.rowIndex="3"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="6"
+                       GridPane.rowIndex="5"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="6"
+                       GridPane.rowIndex="7"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="7"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="7"
+                       GridPane.rowIndex="2"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="7"
+                       GridPane.rowIndex="4"/>
+                <Label prefHeight="88.0" prefWidth="187.0" styleClass="field1" GridPane.columnIndex="7"
+                       GridPane.rowIndex="6"/>
             </children>
         </GridPane>
-        <Button layoutX="765.0" layoutY="636.0" mnemonicParsing="false" onAction="#drawButtonClicked" text="offer draw" />
-        <Button layoutX="835.0" layoutY="636.0" mnemonicParsing="false" onAction="#resignButtonClicked" text="resign" />
-        <Label fx:id="timePlayer2Label" layoutX="751.0" layoutY="76.0" text="Label" />
-        <Label fx:id="ratingPlayer2Label" layoutX="751.0" layoutY="100.0" text="Label" />
-        <Label fx:id="namePlayer2Label" layoutX="751.0" layoutY="38.0" text="Label" />
-        <Label fx:id="timePlayer1Label" layoutX="751.0" layoutY="723.0" text="Label" />
-        <Label fx:id="ratingPlayer1Label" layoutX="751.0" layoutY="747.0" text="Label" />
-        <Label fx:id="namePlayer1Label" layoutX="751.0" layoutY="685.0" text="Label" />
+        <JFXButton buttonType="RAISED" layoutX="795.0" layoutY="400.0" onAction="#drawButtonClicked" prefHeight="30"
+                   prefWidth="80" styleClass="buttonStyle" stylesheets="@color.css" text="Offer draw"/>
+        <JFXButton buttonType="RAISED" layoutX="885.0" layoutY="400.0" onAction="#drawButtonClicked" prefHeight="30"
+                   prefWidth="80" styleClass="buttonStyle" stylesheets="@color.css" text="Resign"/>
+        <Label fx:id="timePlayer2Label" layoutX="751.0" layoutY="76.0" text="Label">
+            <font>
+                <Font name="Bauhaus 93" size="24.0"/>
+            </font>
+        </Label>
+        <Label fx:id="ratingPlayer2Label" layoutX="751.0" layoutY="100.0" text="Label">
+            <font>
+                <Font name="Bauhaus 93" size="24.0"/>
+            </font>
+        </Label>
+        <Label fx:id="namePlayer2Label" layoutX="751.0" layoutY="38.0" text="Label">
+            <font>
+                <Font name="Bauhaus 93" size="24.0"/>
+            </font>
+        </Label>
+        <Label fx:id="timePlayer1Label" layoutX="751.0" layoutY="723.0" text="Label">
+            <font>
+                <Font name="Bauhaus 93" size="24.0"/>
+            </font>
+        </Label>
+        <Label fx:id="ratingPlayer1Label" layoutX="751.0" layoutY="747.0" text="Label">
+            <font>
+                <Font name="Bauhaus 93" size="24.0"/>
+            </font>
+        </Label>
+        <Label fx:id="namePlayer1Label" layoutX="751.0" layoutY="685.0" text="Label">
+            <font>
+                <Font name="Bauhaus 93" size="24.0"/>
+            </font>
+        </Label>
     </children>
 </AnchorPane>
-
