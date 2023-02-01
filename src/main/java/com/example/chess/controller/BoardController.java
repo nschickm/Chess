@@ -2,7 +2,6 @@ package com.example.chess.controller;
 
 import com.example.chess.model.*;
 import com.example.chess.view.BoardView;
-import javafx.css.Stylesheet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -11,12 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Arrays;
+import java.text.SimpleDateFormat;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Objects;
 
 import static com.example.chess.controller.LoginController.player1name;
@@ -26,17 +21,17 @@ public class BoardController extends AbstractController {
     @FXML
     private GridPane gridPane = new GridPane();
     @FXML
-    private Label timePlayer2;
+    private Label timePlayer2Label;
     @FXML
-    private Label ratingPlayer2;
+    private Label ratingPlayer2Label;
     @FXML
-    private Label namePlayer2;
+    private Label namePlayer2Label;
     @FXML
-    private Label timePlayer1;
+    private Label timePlayer1Label;
     @FXML
-    private Label ratingPlayer1;
+    private Label ratingPlayer1Label;
     @FXML
-    private Label namePlayer1;
+    private Label namePlayer1Label;
 
     private Piece[][] board = new Piece[Piece.MAX_X][Piece.MAX_Y];
     private BoardView boardView;
@@ -49,19 +44,45 @@ public class BoardController extends AbstractController {
     private String drawType;
     private Player player1;
     private Player player2;
+    private double timeBetweenMoves = System.currentTimeMillis();
 
     public void gameStart() throws SQLException {
         boardView.drawBoard();
 
-        player1 = new Player("Mani 1", Piece.WHITE, 1);
-        player2 = new Player("Mani 2", Piece.BLACK, 1);
+        player1 = new Player(player1name, Piece.WHITE, SettingsController.time);
+        player2 = new Player(player2name, Piece.BLACK, SettingsController.time);
         currentPlayer = player1;
 
-        ratingPlayer1.setText(boardView.showPlayer1Data());
-        ratingPlayer2.setText(boardView.showPlayer2Data());
-        namePlayer1.setText(player1name);
-        namePlayer2.setText(player2name);
+        new Thread(() -> {
+            while (true) {
+                currentPlayer.setTimeInMillis(currentPlayer.getTimeInMillis() - (System.currentTimeMillis() - timeBetweenMoves));
+                timeBetweenMoves = System.currentTimeMillis();
 
+                if (currentPlayer.getTimeInMillis() <= 0) {
+                    if (currentPlayer == player1) {
+                        winner = player2;
+                    } else {
+                        winner = player1;
+                    }
+
+                    gameEnd();
+                    return;
+                }
+
+                if (currentPlayer == player1) {
+                    System.out.println("Player  1: " + new SimpleDateFormat("mm:ss").format(currentPlayer.getTimeInMillis()));
+                    timePlayer1Label.setText(new SimpleDateFormat("mm:ss").format(currentPlayer.getTimeInMillis()));
+                } else {
+                    System.out.println("Player 2: " + new SimpleDateFormat("mm:ss").format(currentPlayer.getTimeInMillis()));
+                    timePlayer2Label.setText(new SimpleDateFormat("mm:ss").format(currentPlayer.getTimeInMillis()));
+                }
+            }
+        }).start();
+
+        ratingPlayer1Label.setText(boardView.showPlayerData(player1));
+        ratingPlayer2Label.setText(boardView.showPlayerData(player2));
+        namePlayer1Label.setText(player1name);
+        namePlayer2Label.setText(player2name);
     }
 
     public void gameEnd() {
@@ -153,6 +174,7 @@ public class BoardController extends AbstractController {
                     selected.move(col, Piece.MAX_Y - row - 1);
                     }
 */
+
                     board[col][Piece.MAX_Y - row - 1] = selected;
                     selected.move(col, Piece.MAX_Y - row - 1);
 
@@ -170,7 +192,6 @@ public class BoardController extends AbstractController {
                 e.printStackTrace();
             }
 
-            System.out.println(Arrays.deepToString(board).replace("]", "]\n"));
             possibleMoves = null;
             selected = null;
             boardView.drawBoard();

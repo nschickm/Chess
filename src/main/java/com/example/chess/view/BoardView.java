@@ -113,13 +113,13 @@ public class BoardView {
         }
     }
 
-    public String showPlayer1Data() throws SQLException {
+    public String showPlayerData(Player player) throws SQLException {
         String player1 = "";
         Connection connection = Database.getConnection();
         try {
 
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT wins AS wins, losses AS losses, draws AS draws FROM t_user WHERE username = '" + player1name + "';");
+            ResultSet resultSet = statement.executeQuery("SELECT wins AS wins, losses AS losses, draws AS draws FROM t_user WHERE username = '" + player.getName() + "';");
 
             if (resultSet.next()) {
                 player1 = "Wins: " + resultSet.getString("wins") + " / Lose: " + resultSet.getString("losses") + " / Draws: " + resultSet.getString("draws");
@@ -131,28 +131,6 @@ public class BoardView {
             e.printStackTrace();
         }
         return player1;
-    }
-
-
-    public String showPlayer2Data() throws SQLException {
-        String player2 = "";
-        Connection connection = Database.getConnection();
-        try {
-
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT wins AS wins, losses AS losses, draws AS draws FROM t_user WHERE username = '" + player2name + "';");
-
-            if (resultSet.next()) {
-                player2 ="Wins: " + resultSet.getString("wins") + " / Lose: " + resultSet.getString("losses") + " / Draws: " + resultSet.getString("draws");
-            }
-
-            resultSet.close();
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return player2;
     }
 
     public void setDraw(){

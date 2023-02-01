@@ -100,11 +100,11 @@
         </GridPane>
         <Button layoutX="765.0" layoutY="636.0" mnemonicParsing="false" onAction="#drawButtonClicked" text="offer draw" />
         <Button layoutX="835.0" layoutY="636.0" mnemonicParsing="false" onAction="#resignButtonClicked" text="resign" />
-        <Label fx:id="timePlayer2" layoutX="751.0" layoutY="76.0" text="Label" />
-        <Label fx:id="ratingPlayer2" layoutX="751.0" layoutY="100.0" text="Label" />
-        <Label fx:id="namePlayer2" layoutX="751.0" layoutY="38.0" text="Label" />
-        <Label fx:id="timePlayer1" layoutX="751.0" layoutY="723.0" text="Label" />
-        <Label fx:id="ratingPlayer1" layoutX="751.0" layoutY="747.0" text="Label" />
-        <Label fx:id="namePlayer1" layoutX="751.0" layoutY="685.0" text="Label" />
+        <Label fx:id="timePlayer2Label" layoutX="751.0" layoutY="76.0" text="Label" />
+        <Label fx:id="ratingPlayer2Label" layoutX="751.0" layoutY="100.0" text="Label" />
+        <Label fx:id="namePlayer2Label" layoutX="751.0" layoutY="38.0" text="Label" />
+        <Label fx:id="timePlayer1Label" layoutX="751.0" layoutY="723.0" text="Label" />
+        <Label fx:id="ratingPlayer1Label" layoutX="751.0" layoutY="747.0" text="Label" />
+        <Label fx:id="namePlayer1Label" layoutX="751.0" layoutY="685.0" text="Label" />
     </children>
 </AnchorPane>

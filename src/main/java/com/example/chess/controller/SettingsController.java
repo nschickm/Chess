@@ -26,7 +26,6 @@ public class SettingsController extends AbstractController {
     public static String color2;
     public static double time;
 
-
     public void initialize() {
         comboBox.getItems().addAll(
                 "5 minutes",
@@ -72,6 +71,9 @@ public class SettingsController extends AbstractController {
                         "}" +
                         ".field1 {\n" +
                         "    -fx-background-color:" + color2 + ";\n" +
+                        "}" +
+                        ".anchorPane {" +
+                        "-fx-background-color:" + color2 +
                         "}");
             } catch (IOException e) {
                 e.printStackTrace();

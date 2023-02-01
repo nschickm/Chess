@@ -17,38 +17,46 @@ public class Rook extends Piece {
             }
         }
 
-        for (int i = 0; i < MAX_X - x; i++) {
+        for (int i = 1; i < MAX_X - x; i++) {
             if (board[x + i][y] == null) {
                 possibleMoves[x + i][y] = true;
             } else if (!Objects.equals(board[x + i][y].color, color)) {
                 possibleMoves[x + i][y] = true;
                 i = MAX_X - x;
+            } else {
+                i = MAX_X - x;
             }
         }
 
-        for (int i = 0; i < x; i++) {
+        for (int i = 1; i <= x; i++) {
             if (board[x - i][y] == null) {
                 possibleMoves[x - i][y] = true;
             } else if (!Objects.equals(board[x - i][y].color, color)) {
                 possibleMoves[x - i][y] = true;
                 i = x;
+            } else {
+                i = x;
             }
         }
 
-        for (int i = 0; i < MAX_Y - y; i++) {
+        for (int i = 1; i < MAX_Y - y; i++) {
             if (board[x][y + i] == null) {
                 possibleMoves[x][y + i] = true;
             } else if (!Objects.equals(board[x][y + i].color, color)) {
                 possibleMoves[x][y + i] = true;
                 i = MAX_Y - y;
+            } else {
+                i = MAX_Y - y;
             }
         }
 
-        for (int i = 0; i < y; i++) {
+        for (int i = 1; i <= y; i++) {
             if (board[x][y - i] == null) {
                 possibleMoves[x][y - i] = true;
             } else if (!Objects.equals(board[x][y - i].color, color)) {
                 possibleMoves[x][y - i] = true;
+                i = y;
+            } else {
                 i = y;
             }
         }
