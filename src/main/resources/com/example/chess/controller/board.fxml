@@ -108,3 +108,4 @@
         <Label fx:id="namePlayer1Label" layoutX="751.0" layoutY="685.0" text="Label" />
     </children>
 </AnchorPane>
+
