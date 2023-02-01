@@ -2,6 +2,7 @@ package com.example.chess.controller;
 
 import com.example.chess.model.*;
 import com.example.chess.view.BoardView;
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -52,9 +53,12 @@ public class BoardController extends AbstractController {
         player1 = new Player(player1name, Piece.WHITE, SettingsController.time);
         player2 = new Player(player2name, Piece.BLACK, SettingsController.time);
         currentPlayer = player1;
+        timePlayer1Label.setText(new SimpleDateFormat("mm:ss").format(currentPlayer.getTimeInMillis()));
+        timePlayer2Label.setText(new SimpleDateFormat("mm:ss").format(currentPlayer.getTimeInMillis()));
 
-        new Thread(() -> {
-            while (true) {
+        new AnimationTimer() {
+            @Override
+            public void handle(long l) {
                 currentPlayer.setTimeInMillis(currentPlayer.getTimeInMillis() - (System.currentTimeMillis() - timeBetweenMoves));
                 timeBetweenMoves = System.currentTimeMillis();
 
@@ -66,18 +70,16 @@ public class BoardController extends AbstractController {
                     }
 
                     gameEnd();
-                    return;
+                    stop();
                 }
 
                 if (currentPlayer == player1) {
-                    System.out.println("Player  1: " + new SimpleDateFormat("mm:ss").format(currentPlayer.getTimeInMillis()));
-                    timePlayer1Label.setText(new SimpleDateFormat("mm:ss").format(currentPlayer.getTimeInMillis()));
+                    timePlayer1Label.setText(new SimpleDateFormat("mm:ss:SS").format(currentPlayer.getTimeInMillis()));
                 } else {
-                    System.out.println("Player 2: " + new SimpleDateFormat("mm:ss").format(currentPlayer.getTimeInMillis()));
-                    timePlayer2Label.setText(new SimpleDateFormat("mm:ss").format(currentPlayer.getTimeInMillis()));
+                    timePlayer2Label.setText(new SimpleDateFormat("mm:ss:SS").format(currentPlayer.getTimeInMillis()));
                 }
             }
-        }).start();
+        }.start();
 
         ratingPlayer1Label.setText(boardView.showPlayerData(player1));
         ratingPlayer2Label.setText(boardView.showPlayerData(player2));
@@ -119,29 +121,33 @@ public class BoardController extends AbstractController {
         int col = GridPane.getColumnIndex(node);
         int row = GridPane.getRowIndex(node);
         if (selected == null) {
-            selected = board[col][Piece.MAX_Y - row - 1];
 
-            if (Objects.equals(selected.getColor(), currentPlayer.getColor())) {
+            if (board[col][Piece.MAX_Y - row - 1] != null) {
+                selected = board[col][Piece.MAX_Y - row - 1];
 
-                possibleMoves = board[col][Piece.MAX_Y - row - 1].getPossibleMoves(board);
-                boardView.drawPossibleMoves(possibleMoves);
+                if (Objects.equals(selected.getColor(), currentPlayer.getColor())) {
+
+                    possibleMoves = board[col][Piece.MAX_Y - row - 1].getPossibleMoves(board);
+                    boardView.drawPossibleMoves(possibleMoves);
+                }
             }
         } else {
             try {
                 int kingX = -1;
                 int kingY = -1;
+                if (possibleMoves != null) {
 
-                if (possibleMoves[col][Piece.MAX_Y - row - 1]) {
+                    if (possibleMoves[col][Piece.MAX_Y - row - 1]) {
 
-                    for (int i = 0; i < Piece.MAX_X; i++) {
-                        for (int j = 0; j < Piece.MAX_Y; j++) {
-                            if (board[i][j] == selected) {
-                                board[i][j] = null;
-                                i = Piece.MAX_X;
-                                j = Piece.MAX_Y;
+                        for (int i = 0; i < Piece.MAX_X; i++) {
+                            for (int j = 0; j < Piece.MAX_Y; j++) {
+                                if (board[i][j] == selected) {
+                                    board[i][j] = null;
+                                    i = Piece.MAX_X;
+                                    j = Piece.MAX_Y;
+                                }
                             }
                         }
-                    }
                         /*
                             }
 
@@ -175,13 +181,14 @@ public class BoardController extends AbstractController {
                     }
 */
 
-                    board[col][Piece.MAX_Y - row - 1] = selected;
-                    selected.move(col, Piece.MAX_Y - row - 1);
+                        board[col][Piece.MAX_Y - row - 1] = selected;
+                        selected.move(col, Piece.MAX_Y - row - 1);
 
-                    if (currentPlayer == player1) {
-                        currentPlayer = player2;
-                    } else {
-                        currentPlayer = player1;
+                        if (currentPlayer == player1) {
+                            currentPlayer = player2;
+                        } else {
+                            currentPlayer = player1;
+                        }
                     }
                 } else {
                     System.out.println("Move not possible");
