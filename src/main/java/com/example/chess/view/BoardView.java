@@ -19,16 +19,33 @@ import java.util.Objects;
 import static com.example.chess.controller.LoginController.player1name;
 import static com.example.chess.controller.LoginController.player2name;
 
+/**
+ * BoardView class represents the view component of the chess game
+ * It is responsible for visualizing the chessboard and pieces on the chessboard.
+ *
+ * @author
+ */
 public class BoardView {
     private GridPane gridPane;
     private ArrayList<ImageView> images = new ArrayList<>();
     Piece[][] board;
 
+    /**
+     * Constructor to initialize the gridPane and board instance variables.
+     *
+     * @param gridPane GridPane instance to represent the chessboard.
+     * @param board A 2-Dimensional array of Piece objects to represent the chessboard.
+     */
     public BoardView(GridPane gridPane, Piece[][] board) {
         this.gridPane = gridPane;
         this.board = board;
     }
 
+    /**
+     * The method to draw the chessboard and pieces on it.
+     * It removes the existing pieces from the gridPane,
+     * then iterates through the board array and adds the ImageView of the pieces to the gridPane.
+     */
     public void drawBoard() {
         List<Node> toRemove = new ArrayList<>();
         for (Node node : gridPane.getChildren()) {
@@ -89,14 +106,11 @@ public class BoardView {
         }
     }
 
-    @Override
-    public String toString() {
-        return "BoardView{" +
-                "gridPane=" + gridPane +
-                ", board=" + Arrays.toString(board) +
-                '}';
-    }
-
+    /**
+     * The method to draw the possible moves on the chessboard.
+     *
+     * @param possibleMoves A 2-Dimensional boolean array to represent the possible moves.
+     */
     public void drawPossibleMoves(Boolean[][] possibleMoves) {
         for (int i = 0; i < Piece.MAX_X; i++) {
             for (int j = 0; j < Piece.MAX_Y; j++) {
@@ -113,71 +127,13 @@ public class BoardView {
         }
     }
 
-    public String showPlayerData(Player player) throws SQLException {
-        String player1 = "";
-        Connection connection = Database.getConnection();
-        try {
-
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT wins AS wins, losses AS losses, draws AS draws FROM t_user WHERE username = '" + player.getName() + "';");
-
-            if (resultSet.next()) {
-                player1 = "Wins: " + resultSet.getString("wins") + " / Lose: " + resultSet.getString("losses") + " / Draws: " + resultSet.getString("draws");
-            }
-
-            resultSet.close();
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return player1;
-    }
-
-    public void setDraw(){
-        Connection connection = Database.getConnection();
-        try {
-
-            Statement statement = connection.createStatement();
-            Statement statement1 = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("UPDATE t_user SET draws = IFNULL(draws, 0) + 1 WHERE username ='" + player1name  + "';");
-            ResultSet resultSet1 = statement.executeQuery("UPDATE t_user SET draws = IFNULL(draws, 0) + 1 WHERE username ='" + player2name  + "';");
-
-            resultSet1.close();
-            resultSet.close();
-            statement1.close();
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setWin(String player){
-        Connection connection = Database.getConnection();
-        try {
-
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("UPDATE t_user SET wins = IFNULL(wins, 0) + 1 WHERE username ='" + player  + "';");
-
-
-            resultSet.close();
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public String toString() {
+        return "BoardView{" +
+                "gridPane=" + gridPane +
+                ", board=" + Arrays.toString(board) +
+                '}';
     }
 
 
-    public void setLose(String player){
-        Connection connection = Database.getConnection();
-        try {
-
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("UPDATE t_user SET losses = IFNULL(losses, 0) + 1 WHERE username ='" + player  + "';");
-
-            resultSet.close();
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

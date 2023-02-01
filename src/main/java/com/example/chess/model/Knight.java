@@ -2,12 +2,32 @@ package com.example.chess.model;
 
 import java.util.Objects;
 
+
+/**
+ * The Knight class extends the Piece class and represents a knight piece in a chess game.
+ *
+ * @author  Example User
+ */
 public class Knight extends Piece {
+
+    /**
+     * Constructs a knight with the given x, y coordinates and color.
+     *
+     * @param x the x-coordinate of the knight
+     * @param y the y-coordinate of the knight
+     * @param color the color of the knight (either "white" or "black")
+     */
     public Knight(int x, int y, String color) {
         super(x, y, color);
         name = "knight";
     }
 
+    /**
+     * Returns a 2D Boolean array representing the possible moves of the knight on the given chess board.
+     *
+     * @param board the current state of the chess board
+     * @return a 2D Boolean array representing the possible moves of the knight
+     */
     @Override
     public Boolean[][] getPossibleMoves(Piece[][] board) {
         Boolean[][] possibleMoves = new Boolean[MAX_X][MAX_Y];

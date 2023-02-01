@@ -3,19 +3,30 @@ package com.example.chess.model;
 import java.util.Objects;
 
 /**
+ * The King class extends the Piece class and represents a king piece in a chess game.
  *
+ * @author  Example User
  */
 public class King extends Piece {
+
+
+    /**
+     * Constructs a king with the given x, y coordinates and color.
+     *
+     * @param x the x-coordinate of the king
+     * @param y the y-coordinate of the king
+     * @param color the color of the king (either "white" or "black")
+     */
     public King(int x, int y, String color) {
         super(x, y, color);
         name = "king";
     }
 
     /**
-     * Checks all the possible moves for King piece
+     * Returns a 2D Boolean array representing the possible moves of the king on the given chess board.
      *
-     * @param board
-     * @return
+     * @param board the current state of the chess board
+     * @return a 2D Boolean array representing the possible moves of the king
      */
     @Override
     public Boolean[][] getPossibleMoves(Piece[][] board) {

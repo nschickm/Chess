@@ -7,13 +7,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.sql.*;
 import java.util.Objects;
+import java.util.Optional;
 
 import static com.example.chess.controller.LoginController.player1name;
 import static com.example.chess.controller.LoginController.player2name;
@@ -46,6 +52,7 @@ public class BoardController extends AbstractController {
     private Player player1;
     private Player player2;
     private double timeBetweenMoves = System.currentTimeMillis();
+    private DatabaseHandler databaseHandler;
 
     public void gameStart() throws SQLException {
         boardView.drawBoard();
@@ -69,7 +76,11 @@ public class BoardController extends AbstractController {
                         winner = player1;
                     }
 
-                    gameEnd();
+                    try {
+                        gameEnd();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     stop();
                 }
 
@@ -81,23 +92,36 @@ public class BoardController extends AbstractController {
             }
         }.start();
 
-        ratingPlayer1Label.setText(boardView.showPlayerData(player1));
-        ratingPlayer2Label.setText(boardView.showPlayerData(player2));
+        ratingPlayer1Label.setText(databaseHandler.getPlayerData(player1));
+        ratingPlayer2Label.setText(databaseHandler.getPlayerData(player2));
         namePlayer1Label.setText(player1name);
         namePlayer2Label.setText(player2name);
     }
 
-    public void gameEnd() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    public void gameEnd() throws IOException, IOException {
+        Stage stage = (Stage) timePlayer2Label.getScene().getWindow();
+        stage.close();
+
+        System.out.println("GamenEnd");
+
+        ButtonType again = new ButtonType("Play again", ButtonBar.ButtonData.OK_DONE);
+        ButtonType endGame = new ButtonType("Close game", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to play again?",again, endGame);
         alert.setTitle("Game End");
+        alert.setHeaderText(null);
+
         if (winner != null) {
             alert.setContentText(winner.getName() + " won the game");
-            boardView.setWin(winner.getName());
-            boardView.setLose(loser.getName());
+            databaseHandler.setWin(winner.getName());
+            databaseHandler.setLose(loser.getName());
+
         } else {
             alert.setContentText("The game ended by " + drawType);
-            boardView.setDraw();
+            databaseHandler.setDraw();
         }
+        alert.getDialogPane().setMinHeight(Region.USE_COMPUTED_SIZE);
+
+        Optional<ButtonType> result = alert.showAndWait();
 
         for (int i = 0; i < Piece.MAX_X; i++) {
             for (int j = 0; j < Piece.MAX_Y; j++) {
@@ -112,6 +136,21 @@ public class BoardController extends AbstractController {
         Boolean isChecked = false;
         Player winner = null;
         String drawType = "";
+
+        if (!result.isPresent()) {
+
+        } else if (result.orElse(endGame) == again) {
+            System.out.println("sdf");
+            LoginController l = this.loadFxmlFile(
+                    "testlogindesign.fxml",
+                    "Player 1 login",
+                    null,
+                    LoginController.class);
+            //oke button is pressed
+
+        } else if (result.equals(endGame)) {
+            // cancel button is pressed
+        }
     }
 
     @FXML
@@ -206,12 +245,13 @@ public class BoardController extends AbstractController {
 
     }
 
-    public void drawButtonClicked(ActionEvent actionEvent) {
+    public void drawButtonClicked(ActionEvent actionEvent) throws IOException {
         drawType = "offered draw";
+        System.out.println("drwa");
         gameEnd();
     }
 
-    public void resignButtonClicked(ActionEvent actionEvent) {
+    public void resignButtonClicked(ActionEvent actionEvent) throws IOException {
         if (currentPlayer == player1) {
             winner = player2;
             loser = player1;

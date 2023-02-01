@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -25,6 +26,7 @@ public class SettingsController extends AbstractController {
     public static String color1;
     public static String color2;
     public static double time;
+    public Label labelClose;
 
     public void initialize() {
         comboBox.getItems().addAll(
@@ -40,6 +42,9 @@ public class SettingsController extends AbstractController {
     }
 
     public void startBttnClicked(ActionEvent actionEvent) throws IOException {
+
+        Stage stage = (Stage) labelClose.getScene().getWindow();
+        stage.close();
 
         if (!comboBoxTheme.getSelectionModel().isEmpty()) {
 
@@ -106,10 +111,13 @@ public class SettingsController extends AbstractController {
                     "Chess",
                     ((Button) actionEvent.getSource()).getScene().getWindow(),
                     BoardController.class
+
             );
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
 
     }
 }
