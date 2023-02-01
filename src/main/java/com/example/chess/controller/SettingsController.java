@@ -62,7 +62,7 @@ public class SettingsController extends AbstractController {
             }
             System.out.println(color1 + " und " + color2);
 
-            File file = new File("src/main/resources/com/example/chess/controller/board.css");
+            File file = new File("target/classes/com/example/chess/controller/board.css");
             FileWriter writer = null;
             try {
                 writer = new FileWriter(file);
