@@ -36,7 +36,7 @@ public class SettingsController extends AbstractController {
                 "20 minutes"
         );
 
-        comboBoxTheme.getItems().addAll(FXCollections.observableArrayList("No Theme", "Sunset", "Royalty", "Blossom"));
+        comboBoxTheme.getItems().addAll(FXCollections.observableArrayList("No Theme", "Wooden", "Royalty", "Blossom"));
 
 
     }
@@ -48,21 +48,21 @@ public class SettingsController extends AbstractController {
 
         if (!comboBoxTheme.getSelectionModel().isEmpty()) {
 
-            if (comboBoxTheme.getValue().equals("Sunset")) {
-                color1 = "BLUE";
-                color2 = "ORANGE";
+            if (comboBoxTheme.getValue().equals("Wooden")) {
+                color1 = "#5e3323";
+                color2 = "#be9155";
 
             } else if (comboBoxTheme.getValue().equals("Royalty")) {
-                color1 = "VIOLET";
-                color2 = "YELLOW";
+                color1 = "#6b879d";
+                color2 = "#3c617e";
 
             } else if (comboBoxTheme.getValue().equals("Blossom")) {
-                color1 = "GREEN";
-                color2 = "PINK";
+                color1 = "YELLOW";
+                color2 = "VIOLET";
 
             } else if (comboBoxTheme.getValue().equals("No Theme")) {
-                color1 = "WHITE";
-                color2 = "BLACK";
+                color1 = "#769656";
+                color2 = "#eeeed2";
 
             }
             System.out.println(color1 + " und " + color2);

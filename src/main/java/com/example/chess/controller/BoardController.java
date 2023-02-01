@@ -52,7 +52,7 @@ public class BoardController extends AbstractController {
     private Player player1;
     private Player player2;
     private double timeBetweenMoves = System.currentTimeMillis();
-    private DatabaseHandler databaseHandler;
+    private DatabaseHandler databaseHandler = new DatabaseHandler();
 
     public void gameStart() throws SQLException {
         boardView.drawBoard();
@@ -165,7 +165,6 @@ public class BoardController extends AbstractController {
                 selected = board[col][Piece.MAX_Y - row - 1];
 
                 if (Objects.equals(selected.getColor(), currentPlayer.getColor())) {
-
                     possibleMoves = board[col][Piece.MAX_Y - row - 1].getPossibleMoves(board);
                     boardView.drawPossibleMoves(possibleMoves);
                 }

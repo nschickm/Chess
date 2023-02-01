@@ -4,6 +4,7 @@ module com.example.chess {
     requires org.postgresql.jdbc;
     requires java.sql;
     requires com.jfoenix;
+    requires mysql.connector.j;
 
 
     opens com.example.chess.controller to javafx.fxml;

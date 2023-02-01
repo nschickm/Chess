@@ -9,11 +9,10 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class ChessApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-       FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("testlogindesign.fxml"));
-      //  FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("settings.fxml"));
+       FXMLLoader fxmlLoader = new FXMLLoader(ChessApplication.class.getResource("testlogindesign.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Chess");
         scene.setFill(Color.TRANSPARENT);
