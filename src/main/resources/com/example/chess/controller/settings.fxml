@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="249.0" prefWidth="441.0" style="-fx-background-radius: 25;" styleClass="colorBackground" stylesheets="@color.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.chess.controller.SettingsController">
    <children>
-      <Label layoutX="91.0" layoutY="40.0" styleClass="fontsForText" stylesheets="@color.css" text="Please select the time" />
+      <Label fx:id="labelClose" layoutX="91.0" layoutY="40.0" styleClass="fontsForText" stylesheets="@color.css" text="Please select the time" />
       <JFXComboBox fx:id="comboBox" layoutX="146.0" layoutY="76.0" prefWidth="150.0" value="10 minutes"/>
       <JFXButton fx:id="startBttn" buttonType="RAISED" layoutX="180.0" layoutY="176.0" onAction="#startBttnClicked" prefHeight="41.0" prefWidth="87.0" styleClass="colorButtonContrast" stylesheets="@color.css" text="Login" />
       <JFXComboBox fx:id="comboBoxTheme" layoutX="146.0" layoutY="125.0" prefWidth="150.0" value="No Theme" />
