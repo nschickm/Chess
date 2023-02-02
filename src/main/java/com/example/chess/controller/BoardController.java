@@ -16,6 +16,9 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
 import java.text.SimpleDateFormat;
 import java.sql.*;
 import java.util.Objects;
@@ -43,6 +46,7 @@ public class BoardController extends AbstractController {
     private Piece[][] board = new Piece[Piece.MAX_X][Piece.MAX_Y];
     private BoardView boardView;
     private Boolean[][] possibleMoves = new Boolean[Piece.MAX_X][Piece.MAX_Y];
+    private Boolean[][] tempPossibleMoves = new Boolean[Piece.MAX_X][Piece.MAX_Y];
     private Piece selected;
     private Player currentPlayer;
     private Boolean isChecked;
@@ -53,6 +57,8 @@ public class BoardController extends AbstractController {
     private Player player2;
     private double timeBetweenMoves = System.currentTimeMillis();
     private DatabaseHandler databaseHandler = new DatabaseHandler();
+    private int pieceWhichPutsKingInCheckPosX = 0;
+    private int pieceWhichPutsKingInCheckPosY = 0;
 
     public void gameStart() throws SQLException {
         boardView.drawBoard();
@@ -85,8 +91,10 @@ public class BoardController extends AbstractController {
                 }
 
                 if (currentPlayer == player1) {
+
                     timePlayer1Label.setText(new SimpleDateFormat("mm:ss:SS").format(currentPlayer.getTimeInMillis()));
                 } else {
+
                     timePlayer2Label.setText(new SimpleDateFormat("mm:ss:SS").format(currentPlayer.getTimeInMillis()));
                 }
             }
@@ -98,7 +106,7 @@ public class BoardController extends AbstractController {
         namePlayer2Label.setText(player2name);
     }
 
-    public void gameEnd() throws IOException, IOException {
+    public void gameEnd() throws IOException {
         Stage stage = (Stage) timePlayer2Label.getScene().getWindow();
         stage.close();
 
@@ -106,12 +114,14 @@ public class BoardController extends AbstractController {
 
         ButtonType again = new ButtonType("Play again", ButtonBar.ButtonData.OK_DONE);
         ButtonType endGame = new ButtonType("Close game", ButtonBar.ButtonData.CANCEL_CLOSE);
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Do you want to play again?",again, endGame);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to play again?", again, endGame);
         alert.setTitle("Game End");
         alert.setHeaderText(null);
 
+        System.out.println("winner: " + winner);
         if (winner != null) {
             alert.setContentText(winner.getName() + " won the game");
+            alert.show();
             databaseHandler.setWin(winner.getName());
             databaseHandler.setLose(loser.getName());
 
@@ -171,6 +181,7 @@ public class BoardController extends AbstractController {
             }
         } else {
             try {
+
                 int kingX = -1;
                 int kingY = -1;
                 if (possibleMoves != null) {
@@ -222,14 +233,39 @@ public class BoardController extends AbstractController {
                         board[col][Piece.MAX_Y - row - 1] = selected;
                         selected.move(col, Piece.MAX_Y - row - 1);
 
+
+                        //if (checkForCheck(board)) {
+                            //System.out.println("IsCheckmate: " + isCheckmate());
+                        //}
+
+
+
                         if (currentPlayer == player1) {
+                            System.out.println("True/False: " + checkForCheck(board));
+                            if (checkForCheck(board)){
+                                System.out.println("isCheckmate: " + isCheckmate());
+                            }
+                            System.out.println("18777");
                             currentPlayer = player2;
                         } else {
+                            if (checkForCheck(board)){
+                                if (isCheckmate()){
+                                    try {
+                                        System.out.println();
+                                        gameEnd();
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+                            }
                             currentPlayer = player1;
+                            System.out.println("True/False: " + checkForCheck(board));
+                            System.out.println("18777");
                         }
+
+                    } else {
+                        System.out.println("Move not possible");
                     }
-                } else {
-                    System.out.println("Move not possible");
                 }
 
 
@@ -292,5 +328,192 @@ public class BoardController extends AbstractController {
 
         gameStart();
     }
+
+    public boolean checkForCheck(Piece[][] board) {
+        Piece currentKing = null;
+        int kingPosX = 0;
+        int kingPosY = 0;
+
+
+        /**
+         * Get position of current King
+         */
+        for (int i = 0; i < Piece.MAX_X; i++) {
+            for (int j = 0; j < Piece.MAX_Y; j++) {
+                if (board[i][j] != null) {
+
+                    if (Objects.equals(board[i][j].getColor(), currentPlayer.getOppositeColor()) && Objects.equals(board[i][j].getName(), "king")) {
+                        kingPosX = i;
+                        kingPosY = j;
+                    }
+                }
+            }
+        }
+
+
+        for (int i = 0; i < Piece.MAX_X; i++) {
+            for (int j = 0; j < Piece.MAX_Y; j++) {
+                if (board[i][j] != null) {
+
+                    /*
+                    If any of the current Players Pieces is able to move to the opposite Players King, the King is in Check
+                     */
+                    if (Objects.equals(board[i][j].getColor(), currentPlayer.getColor())) {
+
+
+                        tempPossibleMoves = board[i][j].getPossibleMoves(board);
+
+                        if (tempPossibleMoves[kingPosX][kingPosY]) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isCheckmate() {
+
+        Piece[][] currentBoard = Piece.deepCopy(board);
+
+        Boolean[][] tempPossibleMovesForKing = new Boolean[Piece.MAX_X][Piece.MAX_Y];
+
+        int kingPosX = 0;
+        int kingPosY = 0;
+
+        Piece currentKing = null;
+
+        /*
+        get position of the current King
+         */
+        for (int i = 0; i < Piece.MAX_X ; i++) {
+            for (int j = 0; j < Piece.MAX_Y; j++) {
+                if (board[i][j] != null) {
+
+                    if (Objects.equals(board[i][j].getColor(), currentPlayer.getOppositeColor()) && Objects.equals(board[i][j].getName(), "king")) {
+                        currentKing = board[i][j];
+                        kingPosX = i;
+                        kingPosY = j;
+                    }
+                }
+            }
+        }
+
+
+        int tempCount = 0;
+        int tempCount1 = 0;
+
+        for (int i = 0; i < (Piece.MAX_X); i++) {
+            for (int j = 0; j < Piece.MAX_Y; j++) {
+                if (currentBoard[i][j] != null) {
+                    if (Objects.equals(currentBoard[i][j].getColor(), currentPlayer.getOppositeColor()) && Objects.equals(currentBoard[i][j].getName(), "king")) {
+                        tempPossibleMovesForKing = currentBoard[i][j].getPossibleMoves(currentBoard);
+
+                        pieceWhichPutsKingInCheckPosX = i;
+                        pieceWhichPutsKingInCheckPosY = j;
+
+                        for (int k = 0; k < (Piece.MAX_X ); k++) {
+                            for (int l = 0; l < Piece.MAX_Y; l++) {
+                                if (tempPossibleMovesForKing[k][l]) {
+                                    System.out.println("pos: " + k + " " + l);
+                                    System.out.println("king: " + kingPosX + " " + kingPosY);
+
+
+
+                                    System.out.println("pieceOn1: " + currentBoard[kingPosX][kingPosY]);
+                                    currentBoard[kingPosX][kingPosY] = null;
+                                    currentBoard[k][l] = currentKing;
+                                    System.out.println("pieceOn2: " + currentBoard[kingPosX][kingPosY]);
+                                    tempCount++;
+
+
+                                    /*
+                                    If all possible moves for the current King equal in a check, the King is in Checkmate
+                                     */
+                                    if (checkForCheck(currentBoard)) {
+                                        System.out.println(Arrays.deepToString(currentBoard).replace("]", "]\n"));
+                                        System.out.println("yes");
+                                        tempCount1++;
+                                    } else {
+                                        System.out.println("no");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (tempCount == tempCount1) {
+            for (int i = 0; i < Piece.MAX_X; i++) {
+                for (int j = 0; j < Piece.MAX_Y; j++) {
+                    if (board[i][j] != null) {
+
+                    /*
+                    Run through all Opposite Players and see if the can move to positions which block or hit the piece that put the opposite king in check
+                     */
+                        if (Objects.equals(board[i][j].getColor(), currentPlayer.getOppositeColor())) {
+                            Boolean[][] movesOfCurrentPieceInLoop = board[i][j].getPossibleMoves(currentBoard);
+
+
+                            for (int k = 0; k < Piece.MAX_X; k++){
+                                for (int l = 0; l < Piece.MAX_Y; l++){
+                                    if (tempPossibleMoves[k][l]){
+
+                                        /*
+                                        If current Piece in Loop can block the way of the Piece which put the King in Check to the king OR If current Piece in Loop can hit this piece
+                                         */
+                                        if (movesOfCurrentPieceInLoop[k][l] || movesOfCurrentPieceInLoop[pieceWhichPutsKingInCheckPosX][pieceWhichPutsKingInCheckPosY]) {
+                                            return false;
+                                        } {
+                                            winner = currentPlayer;
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+
+        /*
+        for (int i = 1; i < Piece.MAX_X - 1; i++) {
+            for (int j = 0; j < Piece.MAX_Y; j++) {
+                if (board[i][j] != null){
+
+                    if (Objects.equals(board[i][j].getColor(), currentPlayer.getOppositeColor()) && Objects.equals(board[i][j].getName())){
+                        System.out.println("CurrentPosKing: " + kingPosX + " " + kingPosY);
+                        System.out.println(board[i][j].getName() + " " + i + " " + j);
+
+                        tempPossibleMoves = board[i][j].getPossibleMoves(board);
+                        System.out.println("kk: " + tempPossibleMoves[kingPosX][kingPosY]);
+                        if (tempPossibleMoves[kingPosX][kingPosY]){
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        System.out.println("Current King: " + currentKing.getPossibleMoves(currentBoard));
+
+
+        possiblePositionsKings.add(new King(currentKing.getX() + 1, currentKing.getY() - 1,currentPlayer.getColor()));
+
+        return true;
+
+         */
+        return false;
+    }
+
+
+
 
 }

@@ -101,24 +101,33 @@ public class King extends Piece {
             }
         }
 
+
+        /*
+        int tempCount = 0;
         for (int i = 0; i < Piece.MAX_X; i++) {
             for (int j = 0; j < Piece.MAX_Y; j++) {
-
-                if (board[i][j] != null) {
-                    if (!Objects.equals(board[i][j].getColor(), color) && !Objects.equals(board[i][j].getName(), "king")) {
-                        Boolean[][] PiecePossibleMoves = board[i][j].getPossibleMoves(board);
-                        for (int k = 0; k < Piece.MAX_X; k++) {
-                            for (int l = 0; l < Piece.MAX_Y; l++) {
-                                if (PiecePossibleMoves[k][l]) {
-                                    possibleMoves[i][j] = false;
-                                }
+                if (!Objects.equals(board[i][j].getColor(), color) && !Objects.equals(board[i][j].getName(), "king")) {
+                    Boolean[][] PiecePossibleMoves = board[i][j].getPossibleMoves(board);
+                    for (int k = 0; k < Piece.MAX_X; k++) {
+                        for (int l = 0; l < Piece.MAX_Y; l++) {
+                            if (PiecePossibleMoves[k][l]) {
+                                tempCount++;
+                                possibleMoves[i][j] = false;
                             }
                         }
                     }
                 }
-
             }
         }
+
+         */
+
+
+
+
+
+
+
 
         return possibleMoves;
     }

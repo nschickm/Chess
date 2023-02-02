@@ -57,6 +57,14 @@ public class Player extends AbstractController {
         return color;
     }
 
+    public String getOppositeColor(){
+        if (this.color == Piece.WHITE){
+            return Piece.BLACK;
+        } else {
+            return Piece.WHITE;
+        }
+    }
+
     public void setColor(String color) {
         this.color = color;
     }
