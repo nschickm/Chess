@@ -335,7 +335,7 @@ public class BoardController extends AbstractController {
         }
     }
 
-    }
+
 
     /**
      * Resign button event handler. Sets the winner and loser based on the current player and calls the gameEnd() function.
@@ -391,6 +391,11 @@ public class BoardController extends AbstractController {
         gameStart();
     }
 
+    /**
+     * Check if the King is currently under Check
+     * @param board
+     * @return true -> King is under Check; false -> King is not under Check
+     */
     public boolean checkForCheck(Piece[][] board) {
         Piece currentKing = null;
         int kingPosX = 0;
@@ -435,6 +440,10 @@ public class BoardController extends AbstractController {
         return false;
     }
 
+    /**
+     * Check for Checkmate
+     * @return true -> Checkmate; false -> no Checkmate
+     */
     public boolean isCheckmate() {
 
         Piece[][] currentBoard = Piece.deepCopy(board);
