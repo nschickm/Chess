@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * The Pawn class extends the Piece class and represents a pawn piece in a chess game.
  *
- * @author  Example User
+ * @author decker
  */
 public class Pawn extends Piece {
 

@@ -1,13 +1,13 @@
 /*Color gradient*/
-.colorBackground{
-    -fx-background-color: linear-gradient( to right top, #facd68, #fc76b3);
+.colorBackground {
+    -fx-background-color: linear-gradient(to right top, #facd68, #fc76b3);
 }
 
-.colorButtonContrast{
-    -fx-background-color: linear-gradient( to right top, blueviolet, #fc76b3);
+.colorButtonContrast {
+    -fx-background-color: linear-gradient(to right top, blueviolet, #fc76b3);
 }
 
-.fontsForText{
+.fontsForText {
     -fx-font-family: Arial;
     -fx-font-weight: 800;
     -fx-font-size: 25px;

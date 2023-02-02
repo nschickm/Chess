@@ -12,7 +12,7 @@ import static com.example.chess.controller.LoginController.player2name;
  * This class is responsible for handling the database operations for the chess game.
  * It provides methods for updating the wins, losses and draws of the players in the database.
  *
- * @author
+ * @author nschickm
  */
 public class DatabaseHandler {
 
@@ -24,7 +24,7 @@ public class DatabaseHandler {
      * @throws SQLException if there is any error while querying the database
      */
     public String getPlayerData(Player player) throws SQLException {
-        String player1 = "";
+        String playerData = "";
         Connection connection = Database.getConnection();
         try {
 
@@ -32,15 +32,16 @@ public class DatabaseHandler {
             ResultSet resultSet = statement.executeQuery("SELECT wins AS wins, losses AS losses, draws AS draws FROM t_user WHERE username = '" + player.getName() + "';");
 
             if (resultSet.next()) {
-                player1 = "Wins: " + resultSet.getString("wins") + " / Lose: " + resultSet.getString("losses") + " / Draws: " + resultSet.getString("draws");
+                playerData = "Wins: " + resultSet.getString("wins") + " / Lose: " + resultSet.getString("losses") + " / Draws: " + resultSet.getString("draws");
             }
 
+            playerData = playerData.replace("null", "0");
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return player1;
+        return playerData;
     }
 
     /**
@@ -73,7 +74,6 @@ public class DatabaseHandler {
 
             Statement statement = connection.createStatement();
             statement.executeUpdate("UPDATE t_user SET wins = IFNULL(wins, 0) + 1 WHERE username ='" + player  + "';");
-
 
             statement.close();
         } catch (SQLException e) {

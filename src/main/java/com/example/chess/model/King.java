@@ -5,16 +5,15 @@ import java.util.Objects;
 /**
  * The King class extends the Piece class and represents a king piece in a chess game.
  *
- * @author  Example User
+ * @author decker
  */
 public class King extends Piece {
-
 
     /**
      * Constructs a king with the given x, y coordinates and color.
      *
-     * @param x the x-coordinate of the king
-     * @param y the y-coordinate of the king
+     * @param x     the x-coordinate of the king
+     * @param y     the y-coordinate of the king
      * @param color the color of the king (either "white" or "black")
      */
     public King(int x, int y, String color) {

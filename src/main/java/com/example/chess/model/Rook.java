@@ -5,15 +5,14 @@ import java.util.Objects;
 /**
  * The Rook class extends the Piece class and represents a rook piece in a chess game.
  *
- * @author  Example User
+ * @author decker
  */
 public class Rook extends Piece {
-
     /**
      * Constructs a rook with the given x, y coordinates and color.
      *
-     * @param x the x-coordinate of the rook
-     * @param y the y-coordinate of the rook
+     * @param x     the x-coordinate of the rook
+     * @param y     the y-coordinate of the rook
      * @param color the color of the rook (either "white" or "black")
      */
     public Rook(int x, int y, String color) {

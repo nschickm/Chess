@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 /**
  * The class representing a chess player.
  *
- * @author
+ * @author mani
  */
 public class Player extends AbstractController {
     private String name;

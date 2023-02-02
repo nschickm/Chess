@@ -25,4 +25,16 @@
 
 
 
+## Game instructions:
+First player 1 has to log in or register, then the same scene is called again for player 2. If the name or password is wrong or does not exist, the game is stopped immediately, also it is checked if two different players log in, if this is not the case, then the scene is called until there are two different players. 
+
+Then the time and theme are selected. 
+
+The player who logs in first always starts the game and always plays with white pieces. Player 2 plays with black pieces. As soon as one clicks on a piece the marked fields appear, on which a move would be possible.
+
+If resign is pressed, the player who is currently on the move has given up and thus lost. If a draw is offered, the other player must also accept the draw, otherwise the game continues. 
+
+The winning message is announced with an alert, which can then be used to either end the game or start a new game.
+
+
 

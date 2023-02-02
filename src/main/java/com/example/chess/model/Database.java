@@ -6,8 +6,6 @@ import java.sql.SQLException;
 
 /**
  * Database is a singleton class that handles the database connection.
- *
- * @author
  */
 public class Database {
 
@@ -25,7 +23,7 @@ public class Database {
      */
     static {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

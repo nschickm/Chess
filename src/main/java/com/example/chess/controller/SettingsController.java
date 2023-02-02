@@ -13,11 +13,15 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 
+/**
+ * The SettingsController class is responsible for controlling the settings of the chess game.
+ * It provides options to select game time and theme color.
+ *
+ * @author nschickm, meder1, decker
+ */
 public class SettingsController extends AbstractController {
     public JFXComboBox comboBox;
     public JFXButton startBttn;
@@ -28,6 +32,9 @@ public class SettingsController extends AbstractController {
     public static double time;
     public Label labelClose;
 
+    /**
+     * Initialize method is used to add options for game time and theme color in the comboBox and comboBoxTheme.
+     */
     public void initialize() {
         comboBox.getItems().addAll(
                 "5 minutes",
@@ -41,6 +48,13 @@ public class SettingsController extends AbstractController {
 
     }
 
+    /**
+     * startBttnClicked method is called when the start button is clicked. It sets the game time and theme color.
+     * It also closes the settings window and opens the board window.
+     *
+     * @param actionEvent the action event that triggers this method
+     * @throws IOException if an I/O error occurs
+     */
     public void startBttnClicked(ActionEvent actionEvent) throws IOException {
 
         Stage stage = (Stage) labelClose.getScene().getWindow();
@@ -65,13 +79,15 @@ public class SettingsController extends AbstractController {
                 color2 = "#eeeed2";
 
             }
-            System.out.println(color1 + " und " + color2);
 
-            File file = new File("target/classes/com/example/chess/controller/board.css");
-            FileWriter writer = null;
+            File boardCssPath = new File("target/classes/com/example/chess/controller/board.css");
+            FileWriter boardCssWriter = null;
+
+            File colorCssPath = new File("target/classes/com/example/chess/controller/color.css");
+            FileWriter colorCssWriter = null;
             try {
-                writer = new FileWriter(file);
-                writer.write(".field {\n" +
+                boardCssWriter = new FileWriter(boardCssPath);
+                boardCssWriter.write(".field {\n" +
                         "    -fx-background-color:" + color1 + ";\n" +
                         "}" +
                         ".field1 {\n" +
@@ -80,13 +96,42 @@ public class SettingsController extends AbstractController {
                         ".anchorPane {" +
                         "-fx-background-color:" + color2 +
                         "}");
+
+
+                StringBuilder colorCssContent = new StringBuilder();
+                File file2 = new File("src/main/resources/com/example/chess/controller/color.css");
+                try {
+                    FileReader fr = new FileReader(file2);
+                    BufferedReader br = new BufferedReader(fr);
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        colorCssContent.append(line);
+                    }
+                    br.close();
+                } catch (FileNotFoundException e) {
+                    System.out.println("File not found: " + boardCssPath.toString());
+                } catch (IOException e) {
+                    System.out.println("Unable to read boardCssPath: " + boardCssPath.toString());
+                }
+
+                colorCssWriter = new FileWriter(colorCssPath);
+                colorCssWriter.write(colorCssContent +
+                        ".buttonStyle {\n" +
+                        "   -fx-background-color: linear-gradient(to right top, " + color1 + ", " + color2 + ");\n" +
+                        "}");
+
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
                 try {
-                    if (writer != null) {
-                        writer.flush();
-                        writer.close();
+                    if (boardCssWriter != null) {
+                        boardCssWriter.flush();
+                        boardCssWriter.close();
+                    }
+
+                    if (colorCssWriter != null) {
+                        colorCssWriter.flush();
+                        colorCssWriter.close();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -116,7 +161,6 @@ public class SettingsController extends AbstractController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
 
     }
