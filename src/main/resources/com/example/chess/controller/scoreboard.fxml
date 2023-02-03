@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="349.0" prefWidth="441.0" style="-fx-background-radius: 25;" styleClass="colorBackground"
+            stylesheets="@color.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.chess.controller.ScoreboardController">
+    <children>
+        <Label layoutX="151.0" layoutY="31.0" styleClass="fontsForText" stylesheets="@color.css" text="Scoreboard"/>
+
+        <JFXListView fx:id="scoreListView" layoutX="16.0" layoutY="68.0" prefHeight="214.0" prefWidth="411.0"
+                    styleClass="list-view" stylesheets="@scoreboard.css"
+                     AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="14.0"
+                     AnchorPane.topAnchor="68.0" />
+
+        <JFXButton fx:id="buttonclose" buttonType="RAISED" layoutX="327.0" layoutY="293.0" mnemonicParsing="false"
+                   onAction="#closeScore" prefHeight="41.0" prefWidth="87.0" styleClass="colorButtonContrast"
+                   stylesheets="@color.css" text="Close"/>
+    </children>
+</AnchorPane>

@@ -31,6 +31,7 @@ public class SettingsController extends AbstractController {
     public static String color2;
     public static double time;
     public Label labelClose;
+    public Button showScoreboard;
 
     /**
      * Initialize method is used to add options for game time and theme color in the comboBox and comboBoxTheme.
@@ -163,5 +164,24 @@ public class SettingsController extends AbstractController {
         }
 
 
+    }
+
+    /**
+     * Shows the scoreboard by loading the scoreboard.fxml file.
+     *
+     * @param actionEvent The action event that triggered this method.
+     */
+    public void showScoreboard(ActionEvent actionEvent) {
+        try {
+            ScoreboardController s = this.loadFxmlFile(
+                    "scoreboard.fxml",
+                    "Scoreboard",
+                    ((Button) actionEvent.getSource()).getScene().getWindow(),
+                    ScoreboardController.class
+
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

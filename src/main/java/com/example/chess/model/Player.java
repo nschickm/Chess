@@ -3,7 +3,8 @@ package com.example.chess.model;
 import com.example.chess.controller.AbstractController;
 import javafx.scene.paint.Color;
 
-import java.sql.ResultSet;
+import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * The class representing a chess player.
@@ -14,6 +15,9 @@ public class Player extends AbstractController {
     private String name;
     private String color;
     private double timeInMillis;
+    private int wins;
+    private int losses;
+    private int draws;
 
 
     /**
@@ -45,6 +49,46 @@ public class Player extends AbstractController {
 
     }
 
+    /**
+     * Constructs a Player object from a ResultSet.
+     *
+     * @param resultSet The ResultSet that contains the player data.
+     * @throws SQLException If an error occurs while reading from the ResultSet.
+     */
+    public Player(ResultSet resultSet) throws SQLException {
+      this.name = resultSet.getString("username");
+      this.wins = resultSet.getInt("wins");
+      this.losses = resultSet.getInt("losses");
+      this.draws = resultSet.getInt("draws");
+    }
+
+
+    /**
+     * Returns a list of all players and their scores.
+     *
+     * @return An ArrayList of all players and their scores.
+     */
+    public static ArrayList<Player> getScore(){
+        ArrayList<Player> playerList = new ArrayList<>();
+        Connection connection = Database.getConnection();
+        try {
+
+            PreparedStatement statement =
+                    connection.prepareStatement("SELECT username, wins, losses, draws FROM t_user;");
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                playerList.add(new Player(resultSet));
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return playerList;
+    }
+
+
     public String getName() {
         return name;
     }
@@ -75,5 +119,11 @@ public class Player extends AbstractController {
 
     public void setTimeInMillis(double timeInMillis) {
         this.timeInMillis = timeInMillis;
+    }
+
+
+    @Override
+    public String toString() {
+        return name + ": Wins: " + wins + " Losses: " + losses + " Draws: " + draws;
     }
 }

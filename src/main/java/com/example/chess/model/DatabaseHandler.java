@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import static com.example.chess.controller.LoginController.player1name;
 import static com.example.chess.controller.LoginController.player2name;
@@ -98,4 +99,5 @@ public class DatabaseHandler {
             e.printStackTrace();
         }
     }
+
 }
