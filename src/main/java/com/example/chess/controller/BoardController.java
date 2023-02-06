@@ -57,7 +57,6 @@ public class BoardController extends AbstractController {
     private Boolean[][] tempPossibleMoves = new Boolean[Piece.MAX_X][Piece.MAX_Y];
     private Piece selected;
     private Player currentPlayer;
-    private Boolean isChecked;
     private Player winner = null;
     private Player loser = null;
     private String drawType;
@@ -129,7 +128,6 @@ public class BoardController extends AbstractController {
         Stage stage = (Stage) timePlayer2Label.getScene().getWindow();
         stage.close();
 
-        System.out.println("GamenEnd");
 
         ButtonType again = new ButtonType("Play again", ButtonBar.ButtonData.OK_DONE);
         ButtonType endGame = new ButtonType("Close game", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -167,7 +165,6 @@ public class BoardController extends AbstractController {
         if (!result.isPresent()) {
 
         } else if (result.orElse(endGame) == again) {
-            System.out.println("sdf");
             LoginController l = this.loadFxmlFile(
                     "testlogindesign.fxml",
                     "Player 1 login",
@@ -205,8 +202,7 @@ public class BoardController extends AbstractController {
             }
         } else {
             try {
-                int kingX = -1;
-                int kingY = -1;
+
                 if (possibleMoves != null) {
 
                     if (possibleMoves[col][Piece.MAX_Y - row - 1]) {
@@ -220,39 +216,6 @@ public class BoardController extends AbstractController {
                                 }
                             }
                         }
-                        /*
-                            }
-
-                            if (board[i][j] != null) {
-                                if (Objects.equals(board[i][j].getName(), "king")
-                                        && Objects.equals(board[i][j].getColor(), selected.getColor())) {
-                                    kingX = i;
-                                    kingY = j;
-                                }
-                            }
-                        }
-                    }
-
-                    if (kingX != -1) {
-                        for (int i = 0; i < Piece.MAX_X; i++) {
-                            for (int j = 0; j < Piece.MAX_Y; j++) {
-                                if (!Objects.equals(board[i][j].getColor(), selected.getColor())) {
-                                    if (board[i][j].getPossibleMoves(board)[kingX][kingY]) {
-                                        isChecked = true;
-                                        i = Piece.MAX_X;
-                                        j = Piece.MAX_Y;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    if (!isChecked) {
-                    board[selected.getX()][selected.getY()] = selected;
-                    selected.move(col, Piece.MAX_Y - row - 1);
-                    }
-*/
-
                         board[col][Piece.MAX_Y - row - 1] = selected;
                         selected.move(col, Piece.MAX_Y - row - 1);
 
@@ -268,18 +231,27 @@ public class BoardController extends AbstractController {
                             }
                         }
 
+                        /**
+                         * Check if King is in Check, if that is the case,
+                         * check for Checkmate
+                         */
                         if (currentPlayer == player1) {
-                            System.out.println("True/False: " + checkForCheck(board));
                             if (checkForCheck(board)){
-                                System.out.println("isCheckmate: " + isCheckmate());
+                                if (isCheckmate()){
+                                    try {
+                                        gameEnd();
+                                    } catch (IOException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
                             }
-                            System.out.println("18777");
+
                             currentPlayer = player2;
                         } else {
                             if (checkForCheck(board)){
                                 if (isCheckmate()){
                                     try {
-                                        System.out.println();
+
                                         gameEnd();
                                     } catch (IOException e) {
                                         throw new RuntimeException(e);
@@ -503,11 +475,7 @@ public class BoardController extends AbstractController {
                                     If all possible moves for the current King equal in a check, the King is in Checkmate
                                      */
                                     if (checkForCheck(currentBoard)) {
-                                        System.out.println(Arrays.deepToString(currentBoard).replace("]", "]\n"));
-                                        System.out.println("yes");
                                         tempCount1++;
-                                    } else {
-                                        System.out.println("no");
                                     }
                                 }
                             }

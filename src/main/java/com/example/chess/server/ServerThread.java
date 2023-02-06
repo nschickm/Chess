@@ -43,7 +43,7 @@ public class ServerThread extends Thread {
 
 
         } catch (Exception e) {
-            System.out.println("Error occured " +e.getStackTrace());
+            e.printStackTrace();
         }
     }
 
